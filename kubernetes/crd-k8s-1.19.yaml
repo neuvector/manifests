@@ -30,6 +30,8 @@ spec:
                       type: string
                     ports:
                       type: string
+                    priority:
+                      type: integer
                     selector:
                       properties:
                         criteria:
@@ -44,6 +46,8 @@ spec:
                             type: object
                           type: array
                         name:
+                          type: string
+                        original_name:
                           type: string
                       type: object
                   type: object
@@ -76,6 +80,8 @@ spec:
                       type: string
                     ports:
                       type: string
+                    priority:
+                      type: integer
                     selector:
                       properties:
                         criteria:
@@ -90,6 +96,8 @@ spec:
                             type: object
                           type: array
                         name:
+                          type: string
+                        original_name:
                           type: string
                       type: object
                   type: object
@@ -123,6 +131,8 @@ spec:
                           type: object
                         type: array
                       name:
+                        type: string
+                      original_name:
                         type: string
                     type: object
                 type: object
@@ -165,6 +175,8 @@ spec:
                       type: string
                     ports:
                       type: string
+                    priority:
+                      type: integer
                     selector:
                       properties:
                         criteria:
@@ -179,6 +191,8 @@ spec:
                             type: object
                           type: array
                         name:
+                          type: string
+                        original_name:
                           type: string
                       type: object
                   type: object
@@ -211,6 +225,8 @@ spec:
                       type: string
                     ports:
                       type: string
+                    priority:
+                      type: integer
                     selector:
                       properties:
                         criteria:
@@ -225,6 +241,8 @@ spec:
                             type: object
                           type: array
                         name:
+                          type: string
+                        original_name:
                           type: string
                       type: object
                   type: object
@@ -258,6 +276,8 @@ spec:
                           type: object
                         type: array
                       name:
+                        type: string
+                      original_name:
                         type: string
                     type: object
                 type: object
