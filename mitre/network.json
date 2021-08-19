@@ -1,5 +1,5 @@
 {
-	"name": "NeuVector Container Protection",
+	"name": "NeuVector Network Protection",
 	"versions": {
 		"attack": "9",
 		"navigator": "4.3",
@@ -9,7 +9,7 @@
 	"description": "",
 	"filters": {
 		"platforms": [
-			"Containers"
+			"Network"
 		]
 	},
 	"sorting": 0,
@@ -116,11 +116,20 @@
 		{
 			"techniqueID": "T1020",
 			"tactic": "exfiltration",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1020.001",
+			"tactic": "exfiltration",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1547",
@@ -161,56 +170,29 @@
 		{
 			"techniqueID": "T1110",
 			"tactic": "credential-access",
-			"color": "#fcf3a2",
-			"comment": "1. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1110.001",
-			"tactic": "credential-access",
-			"color": "#fcf3a2",
-			"comment": "1. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1110.003",
-			"tactic": "credential-access",
-			"color": "#fcf3a2",
-			"comment": "1. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1110.004",
-			"tactic": "credential-access",
-			"color": "#fcf3a2",
-			"comment": "1. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1612",
-			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control checks on volume mount\n2. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1059",
-			"tactic": "execution",
 			"color": "",
 			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1059",
+			"tactic": "execution",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1059.008",
+			"tactic": "execution",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1586",
@@ -229,24 +211,6 @@
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1609",
-			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control checks on volume mount and run-as-root\n2. Process Profile",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1613",
-			"tactic": "discovery",
-			"color": "#a1d99b",
-			"comment": "1. Network Policy\n2. Admission Control on volume mount check",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1136",
@@ -323,11 +287,29 @@
 		{
 			"techniqueID": "T1602",
 			"tactic": "collection",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. File Access Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1602.001",
+			"tactic": "collection",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1602.002",
+			"tactic": "collection",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1213",
@@ -346,24 +328,6 @@
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1610",
-			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control checks on volume mount and privileged container\n2. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1610",
-			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control checks on volume mount and privileged container\n2. Network Policy",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1587",
@@ -431,20 +395,11 @@
 		{
 			"techniqueID": "T1499",
 			"tactic": "impact",
-			"color": "#fcf3a2",
-			"comment": "1. Network Anomaly Protection",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1611",
-			"tactic": "privilege-escalation",
-			"color": "#a1d99b",
-			"comment": "1. Privilege Escalation detection\n2. Admission Control checks on run-as-root\n3. Process Profile\n4. Vulnerability Scan",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1585",
@@ -523,33 +478,6 @@
 			"tactic": "initial-access",
 			"color": "#a1d99b",
 			"comment": "1. Network Policy\n2. Ingress/egress Control\n3. Vulnerability Scan\n4. Admission Control checks on privileged container \n5. OWASP top10 coverage",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1068",
-			"tactic": "privilege-escalation",
-			"color": "#a1d99b",
-			"comment": "1. Privilege Escalation detection\n2. Process Profile\n3. Network Policy\n4. Vulnerability Scan",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1133",
-			"tactic": "persistence",
-			"color": "#a1d99b",
-			"comment": "1. Network Policy\n2. Ingress/egress Control",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1133",
-			"tactic": "initial-access",
-			"color": "#a1d99b",
-			"comment": "1. Network Policy\n2. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": false
@@ -647,35 +575,17 @@
 		{
 			"techniqueID": "T1562",
 			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile\n2. File Access Profile\n3. Vulnerability Scan\n4. Network Policy\n5. NeuVector self-protection",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
 		},
 		{
-			"techniqueID": "T1562.001",
-			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile\n2. File Access Profile\n3. Vulnerability Scan\n4. Network Policy\n5. NeuVector self-protection",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1525",
-			"tactic": "persistence",
-			"color": "#a1d99b",
-			"comment": "1. Vulnerability Scan\n2. Process Profile",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
 			"techniqueID": "T1070",
 			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. File Access Profile",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -683,8 +593,8 @@
 		{
 			"techniqueID": "T1056",
 			"tactic": "collection",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Process Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -692,11 +602,29 @@
 		{
 			"techniqueID": "T1056",
 			"tactic": "credential-access",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Process Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1056.001",
+			"tactic": "collection",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1056.001",
+			"tactic": "credential-access",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1559",
@@ -728,26 +656,17 @@
 		{
 			"techniqueID": "T1036",
 			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. File Access Profile",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1036.005",
-			"tactic": "defense-evasion",
-			"color": "#a1d99b",
-			"comment": "1. File Access Profile",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1556",
 			"tactic": "credential-access",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -755,8 +674,8 @@
 		{
 			"techniqueID": "T1556",
 			"tactic": "defense-evasion",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -764,11 +683,38 @@
 		{
 			"techniqueID": "T1556",
 			"tactic": "persistence",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1556.004",
+			"tactic": "credential-access",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1556.004",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1556.004",
+			"tactic": "persistence",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1578",
@@ -782,15 +728,51 @@
 		{
 			"techniqueID": "T1601",
 			"tactic": "defense-evasion",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1601.001",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1601.002",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1599",
 			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Ingress/egress Control",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1599.001",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1498",
+			"tactic": "impact",
 			"color": "",
 			"comment": "",
 			"enabled": true,
@@ -798,19 +780,28 @@
 			"showSubtechniques": true
 		},
 		{
-			"techniqueID": "T1498",
-			"tactic": "impact",
-			"color": "#fcf3a2",
-			"comment": "1. Network Anomaly Protection",
+			"techniqueID": "T1040",
+			"tactic": "credential-access",
+			"color": "#a1d99b",
+			"comment": "1. Process Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
-			"showSubtechniques": true
+			"showSubtechniques": false
 		},
 		{
-			"techniqueID": "T1046",
+			"techniqueID": "T1040",
 			"tactic": "discovery",
 			"color": "#a1d99b",
-			"comment": "1. Network Policy\n2. Process Profile",
+			"comment": "1. Process Profile\n2. Privilege Escalation Detection\n3. Admission Control",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1095",
+			"tactic": "command-and-control",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": false
@@ -881,8 +872,8 @@
 		{
 			"techniqueID": "T1542",
 			"tactic": "defense-evasion",
-			"color": "",
-			"comment": "",
+			"color": "#fcf26b",
+			"comment": "1. Privilege Escalation Detection",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -890,11 +881,47 @@
 		{
 			"techniqueID": "T1542",
 			"tactic": "persistence",
-			"color": "",
-			"comment": "",
+			"color": "#fcf26b",
+			"comment": "1. Privilege Escalation Detection",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1542.004",
+			"tactic": "defense-evasion",
+			"color": "#fcf26b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1542.004",
+			"tactic": "persistence",
+			"color": "#fcf26b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1542.005",
+			"tactic": "defense-evasion",
+			"color": "#fcf26b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1542.005",
+			"tactic": "persistence",
+			"color": "#fcf26b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1055",
@@ -917,11 +944,20 @@
 		{
 			"techniqueID": "T1090",
 			"tactic": "command-and-control",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1090.003",
+			"tactic": "command-and-control",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1563",
@@ -942,19 +978,10 @@
 			"showSubtechniques": true
 		},
 		{
-			"techniqueID": "T1496",
-			"tactic": "impact",
-			"color": "#a1d99b",
-			"comment": "1. Vulnerability Scan\n2. Process Profile",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
 			"techniqueID": "T1053",
 			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile\n2. RBAC integration",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -962,8 +989,8 @@
 		{
 			"techniqueID": "T1053",
 			"tactic": "persistence",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile\n2. RBAC integration",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -971,38 +998,11 @@
 		{
 			"techniqueID": "T1053",
 			"tactic": "privilege-escalation",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile\n2. RBAC integration",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1053.007",
-			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control check on run-as-root\n2. RBAC integration",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1053.007",
-			"tactic": "persistence",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control check on run-as-root\n2. RBAC integration",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1053.007",
-			"tactic": "privilege-escalation",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control check on run-as-root\n2. RBAC integration",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1597",
@@ -1124,8 +1124,8 @@
 		{
 			"techniqueID": "T1205",
 			"tactic": "defense-evasion",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1133,8 +1133,8 @@
 		{
 			"techniqueID": "T1205",
 			"tactic": "persistence",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1142,11 +1142,38 @@
 		{
 			"techniqueID": "T1205",
 			"tactic": "command-and-control",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. Network Policy\n2. Tunnel Detection\n3. Ingress/egress Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1205.001",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1205.001",
+			"tactic": "persistence",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1205.001",
+			"tactic": "command-and-control",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1127",
@@ -1160,29 +1187,11 @@
 		{
 			"techniqueID": "T1552",
 			"tactic": "credential-access",
-			"color": "#a1d99b",
-			"comment": "1. File Access Profile\n2. Secret Scan\n3. DLP",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
-		},
-		{
-			"techniqueID": "T1552.001",
-			"tactic": "credential-access",
-			"color": "#a1d99b",
-			"comment": "1. Secret Scan",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
-			"techniqueID": "T1552.007",
-			"tactic": "credential-access",
-			"color": "#a1d99b",
-			"comment": "1. Network Policy\n2. Admission Control checks on volume mount and user/service-account",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1550",
@@ -1205,26 +1214,17 @@
 		{
 			"techniqueID": "T1204",
 			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Process Profile",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
 		},
 		{
-			"techniqueID": "T1204.003",
-			"tactic": "execution",
-			"color": "#a1d99b",
-			"comment": "1. Admission Control",
-			"enabled": true,
-			"metadata": [],
-			"showSubtechniques": false
-		},
-		{
 			"techniqueID": "T1078",
 			"tactic": "defense-evasion",
-			"color": "#fcf3a2",
-			"comment": "1. Secret Scan",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1232,8 +1232,8 @@
 		{
 			"techniqueID": "T1078",
 			"tactic": "persistence",
-			"color": "#fcf3a2",
-			"comment": "1. Secret Scan",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1241,8 +1241,8 @@
 		{
 			"techniqueID": "T1078",
 			"tactic": "privilege-escalation",
-			"color": "#fcf3a2",
-			"comment": "1. Secret Scan",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1250,8 +1250,8 @@
 		{
 			"techniqueID": "T1078",
 			"tactic": "initial-access",
-			"color": "#fcf3a2",
-			"comment": "1. Secret Scan",
+			"color": "",
+			"comment": "",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
@@ -1277,11 +1277,29 @@
 		{
 			"techniqueID": "T1600",
 			"tactic": "defense-evasion",
-			"color": "",
-			"comment": "",
+			"color": "#a1d99b",
+			"comment": "1. File Access Profile\n2. Privilege Escalation Detection\n3. Admission Control",
 			"enabled": true,
 			"metadata": [],
 			"showSubtechniques": true
+		},
+		{
+			"techniqueID": "T1600.001",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
+		},
+		{
+			"techniqueID": "T1600.002",
+			"tactic": "defense-evasion",
+			"color": "#a1d99b",
+			"comment": "",
+			"enabled": true,
+			"metadata": [],
+			"showSubtechniques": false
 		},
 		{
 			"techniqueID": "T1102",
