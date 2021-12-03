@@ -173,6 +173,7 @@ spec:
                     - Discover
                     - Monitor
                     - Protect
+                    - N/A
                     type: string
                   selector:
                     properties:
@@ -406,6 +407,7 @@ spec:
                     - Discover
                     - Monitor
                     - Protect
+                    - N/A
                     type: string
                   selector:
                     properties:
