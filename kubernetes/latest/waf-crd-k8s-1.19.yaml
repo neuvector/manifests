@@ -39,6 +39,8 @@ spec:
                                 - packet
                                 type: string
                               key:
+                                enum:
+                                - pattern
                                 type: string
                               op:
                                 enum:
