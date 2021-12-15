@@ -203,9 +203,14 @@ spec:
           hostPath:
             path: /sys/fs/cgroup
         - name: config-volume
-          configMap:
-            name: neuvector-init
-            optional: true
+          projected:
+            sources:
+              - configMap:
+                  name: neuvector-init
+                  optional: true
+              - secret:
+                  name: neuvector-init
+                  optional: true
 
 ---
 
