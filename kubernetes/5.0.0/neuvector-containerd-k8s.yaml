@@ -285,7 +285,7 @@ spec:
     spec:
       containers:
         - name: neuvector-scanner-pod
-          image: neuvector/scanner.preview:5.0.0-preview.1
+          image: neuvector/scanner.preview:latest
           imagePullPolicy: Always
           env:
             - name: CLUSTER_JOIN_ADDR
@@ -310,7 +310,7 @@ spec:
         spec:
           containers:
           - name: neuvector-updater-pod
-            image: neuvector/updater.preview:5.0.0-preview.1
+            image: neuvector/updater.preview:latest
             imagePullPolicy: Always
             lifecycle:
               postStart:

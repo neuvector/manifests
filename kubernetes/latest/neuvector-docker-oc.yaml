@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
         - name: neuvector-manager-pod
-          image: docker-registry.default.svc:5000/neuvector/manager.preview:5.0.0-preview.1
+          image: docker-registry.default.svc:5000/neuvector/manager:<version>
           env:
             - name: CTRL_SERVER_IP
               value: neuvector-svc-controller.neuvector
@@ -148,7 +148,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: neuvector-controller-pod
-          image: docker-registry.default.svc:5000/neuvector/controller.preview:5.0.0-preview.1
+          image: docker-registry.default.svc:5000/neuvector/controller:<version>
           securityContext:
             privileged: true
           readinessProbe:
@@ -234,7 +234,7 @@ spec:
       hostPID: true
       containers:
         - name: neuvector-enforcer-pod
-          image: docker-registry.default.svc:5000/neuvector/enforcer.preview:5.0.0-preview.1
+          image: docker-registry.default.svc:5000/neuvector/enforcer:<version>
           securityContext:
             privileged: true
           env:
@@ -301,7 +301,7 @@ spec:
     spec:
       containers:
         - name: neuvector-scanner-pod
-          image: docker-registry.default.svc:5000/neuvector/scanner.preview:5.0.0-preview.1
+          image: docker-registry.default.svc:5000/neuvector/scanner:<version>
           imagePullPolicy: Always
           env:
             - name: CLUSTER_JOIN_ADDR
@@ -326,7 +326,7 @@ spec:
         spec:
           containers:
           - name: neuvector-updater-pod
-            image: docker-registry.default.svc:5000/neuvector/updater.preview:5.0.0-preview.1
+            image: docker-registry.default.svc:5000/neuvector/updater:<version>
             imagePullPolicy: Always
             lifecycle:
               postStart:
