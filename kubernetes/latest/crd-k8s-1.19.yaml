@@ -204,6 +204,26 @@ spec:
                 required:
                 - selector
                 type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
+                type: object
               waf:
                 properties:
                   settings:
@@ -436,6 +456,26 @@ spec:
                     type: object
                 required:
                 - selector
+                type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
                 type: object
               waf:
                 properties:
