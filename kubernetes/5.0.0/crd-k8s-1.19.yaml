@@ -60,7 +60,6 @@ spec:
                           type: string
                       required:
                       - name
-                      - criteria
                       type: object
                   required:
                   - action
@@ -132,7 +131,6 @@ spec:
                           type: string
                       required:
                       - name
-                      - criteria
                       type: object
                   required:
                   - action
@@ -164,6 +162,8 @@ spec:
                     enum:
                     - default
                     - shield
+                    - basic
+                    - zero-drift
                     type: string
                 type: object
               target:
@@ -200,10 +200,29 @@ spec:
                         type: string
                     required:
                     - name
-                    - criteria
                     type: object
                 required:
                 - selector
+                type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
                 type: object
               waf:
                 properties:
@@ -294,7 +313,6 @@ spec:
                           type: string
                       required:
                       - name
-                      - criteria
                       type: object
                   required:
                   - action
@@ -366,7 +384,6 @@ spec:
                           type: string
                       required:
                       - name
-                      - criteria
                       type: object
                   required:
                   - action
@@ -398,6 +415,8 @@ spec:
                     enum:
                     - default
                     - shield
+                    - basic
+                    - zero-drift
                     type: string
                 type: object
               target:
@@ -434,10 +453,29 @@ spec:
                         type: string
                     required:
                     - name
-                    - criteria
                     type: object
                 required:
                 - selector
+                type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
                 type: object
               waf:
                 properties:
