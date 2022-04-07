@@ -176,7 +176,7 @@ spec:
             path: /var/neuvector
         - name: runtime-sock
           hostPath:
-            path: /run/dockershim.sock
+            path: /run/k3s/containerd/containerd.sock
         - name: proc-vol
           hostPath:
             path: /proc
@@ -252,7 +252,7 @@ spec:
             path: /lib/modules
         - name: runtime-sock
           hostPath:
-            path: /run/dockershim.sock
+            path: /run/k3s/containerd/containerd.sock
         - name: proc-vol
           hostPath:
             path: /proc

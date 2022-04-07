@@ -1,5 +1,4 @@
 
-# neuvector yaml version for 5.x.x on docker runtime
 apiVersion: v1
 kind: Service
 metadata:
