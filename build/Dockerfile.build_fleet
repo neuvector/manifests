@@ -3,10 +3,12 @@ MAINTAINER gduan@neuvector.com
 
 # Dockerfile to create container to build binaries
 
-# Fleet
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y build-essential autoconf libtool libpcap-dev libpcre++-dev bzr curl upx wget zip
+
+RUN apt-get install -y debconf-utils software-properties-common && \
+    apt-get install -y libnfnetlink-dev libnetfilter-queue-dev libmnl-dev && \
 
 # Fleet
 ENV GOPATH /go
