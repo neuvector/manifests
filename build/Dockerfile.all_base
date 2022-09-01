@@ -1,4 +1,4 @@
-FROM neuvector/manager_base:jdk11
+FROM neuvector/manager_base:latest
 MAINTAINER support@neuvector.com
 
 COPY stage /
