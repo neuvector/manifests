@@ -27,5 +27,3 @@ RUN sed -i 's/pkcs12/jks/g' /etc/java-11-openjdk/security/java.security && \
     apt-get install ca-certificates-java
 
 COPY build.sh /
-COPY stage/ssl-cert.pem /etc/neuvector/certs/
-COPY stage/ssl-cert.key /etc/neuvector/certs/

@@ -17,5 +17,3 @@ RUN tar -C /usr/local -xzf /tmp/golang.tar.gz && rm /tmp/golang.tar.gz && \
     mkdir -p $GOPATH/src/neuvector.com && mkdir -p $GOPATH/bin
 
 COPY build.sh /
-COPY stage/ssl-cert.pem /etc/neuvector/certs/
-COPY stage/ssl-cert.key /etc/neuvector/certs/
