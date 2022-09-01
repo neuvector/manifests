@@ -1,9 +1,6 @@
-DOCKER_REPO_REL=10.1.127.12:5000
-DOCKER_REPO=10.1.127.3:5000
-
 include Makefile
 
-all: base tag push
+all: base push
 
 base:
 	$(MAKE)	controller_base
