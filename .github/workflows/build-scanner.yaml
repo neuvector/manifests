@@ -1,0 +1,27 @@
+name: Build fleet images
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git clone git@github.com:neuvector/vul-dbgen.git
+          cd ./vul-dbgen
+          git clone --depth 1 git@github.com:neuvector/vul-source.git 
+          VULN_VER=x.xxx make db
+          cd ..
+
+          git clone git@github.com:neuvector/scanner.git
+          mkdir -p scanner/data
+          cp ./vul-dbgen/cvedb.regular scanner/data
+
+          cd ./scanner
+          make binary
+          cd ..
+
+          cp scanner/Makefile Makefile
+          cp scanner/build/dockerignore .dockerignore
+          make scanner_image
