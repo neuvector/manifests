@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-        git clone https://github.com/neuvector/manager.git
+          git clone https://github.com/neuvector/manager.git
 
           cd manager
           make jar
