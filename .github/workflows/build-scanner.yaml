@@ -1,4 +1,4 @@
-name: Build fleet images
+name: Build scanner image
 
 on:
   workflow_dispatch:
@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          git clone git@github.com:neuvector/vul-dbgen.git
+          git clone https://github.com/neuvector/manager.git
           cd ./vul-dbgen
-          git clone --depth 1 git@github.com:neuvector/vul-source.git 
+          git clone --depth 1 https:/github.com/neuvector/vul-source.git
           VULN_VER=x.xxx make db
           cd ..
 
-          git clone git@github.com:neuvector/scanner.git
+          git clone https://github.com/neuvector/scanner.git
           mkdir -p scanner/data
           cp ./vul-dbgen/cvedb.regular scanner/data
 
