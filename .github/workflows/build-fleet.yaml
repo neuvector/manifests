@@ -1,0 +1,20 @@
+name: Build fleet images
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git clone https://github.com/neuvector/neuvector.git
+
+          cd neuvector
+          make fleet
+          cd ..
+
+          cp neuvector/Makefile .
+          cp neuvector/build/dockerignore .dockerignore
+          make ctrl_image
+          make enf_image

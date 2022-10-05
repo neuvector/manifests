@@ -1,5 +1,4 @@
 
-# neuvector yaml version for 5.x.x on containerd runtime
 apiVersion: v1
 kind: Service
 metadata:
@@ -89,7 +88,7 @@ spec:
     spec:
       containers:
         - name: neuvector-manager-pod
-          image: neuvector/manager.preview:5.0.0-preview.1
+          image: neuvector/manager:5.0.3
           env:
             - name: CTRL_SERVER_IP
               value: neuvector-svc-controller.neuvector
@@ -132,7 +131,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: neuvector-controller-pod
-          image: neuvector/controller.preview:5.0.0-preview.1
+          image: neuvector/controller:5.0.3
           securityContext:
             privileged: true
           readinessProbe:
@@ -218,7 +217,7 @@ spec:
       hostPID: true
       containers:
         - name: neuvector-enforcer-pod
-          image: neuvector/enforcer.preview:5.0.0-preview.1
+          image: neuvector/enforcer:5.0.3
           securityContext:
             privileged: true
           env:
@@ -285,7 +284,7 @@ spec:
     spec:
       containers:
         - name: neuvector-scanner-pod
-          image: neuvector/scanner.preview:latest
+          image: neuvector/scanner:latest
           imagePullPolicy: Always
           env:
             - name: CLUSTER_JOIN_ADDR
@@ -310,7 +309,7 @@ spec:
         spec:
           containers:
           - name: neuvector-updater-pod
-            image: neuvector/updater.preview:latest
+            image: neuvector/updater:latest
             imagePullPolicy: Always
             lifecycle:
               postStart:

@@ -1,0 +1,9 @@
+FROM alpine:3.16.2
+MAINTAINER support@neuvector.com
+
+COPY stage /
+
+RUN apk --update add ca-certificates iproute2 ethtool lsof procps && apk del iptables && \
+    apk add --allow-untrusted /glibc-2.33-r0.apk && apk upgrade && \
+    rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk && \
+    ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/glibc-compat/lib/libpcre.so.3

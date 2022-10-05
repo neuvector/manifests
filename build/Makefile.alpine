@@ -1,0 +1,19 @@
+include Makefile
+
+all: base push
+
+base:
+	$(MAKE)	controller_base
+	$(MAKE)	enforcer_base
+	$(MAKE)	manager_base
+	$(MAKE)	all_base
+	$(MAKE)	scanner_base
+	$(MAKE)	updater
+
+push:
+	docker push neuvector/controller_base:latest
+	docker push neuvector/enforcer_base:latest
+	docker push neuvector/manager_base:latest
+	docker push neuvector/all_base:latest
+	docker push neuvector/scanner_base:latest
+	docker push neuvector/updater:latest
