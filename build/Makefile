@@ -19,13 +19,15 @@ stage_fleet_base:
 stage_scan_base: stage_fleet_base
 
 stage_ctrl_base: stage_fleet_base
-	gzip -c prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
-	gzip -c prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
 	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
