@@ -51,23 +51,29 @@ updater:
 	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
 
 scanner_base: stage_init stage_scan_base
-	docker build --no-cache=true -t neuvector/scanner_base -f Dockerfile.scanner_base .
+	docker build --no-cache=true -t neuvector/scanner_base:5.0 -f Dockerfile.scanner_base .
 
 controller_base: stage_init stage_ctrl_base
-	docker build --no-cache=true -t neuvector/controller_base -f Dockerfile.controller_base .
+	docker build --no-cache=true -t neuvector/controller_base:5.0 -f Dockerfile.controller_base .
 
 enforcer_base: stage_init stage_enf_base
-	docker build --no-cache=true -t neuvector/enforcer_base -f Dockerfile.enforcer_base .
+	docker build --no-cache=true -t neuvector/enforcer_base:5.0 -f Dockerfile.enforcer_base .
 
 manager_base: stage_init stage_mgr_base
-	docker build --no-cache=true -t neuvector/manager_base -f Dockerfile.manager_base .
+	docker build --no-cache=true -t neuvector/manager_base:5.0 -f Dockerfile.manager_base .
 
 all_base: stage_init stage_enf_base stage_ctrl_base
-	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .
+	docker build --no-cache=true -t neuvector/all_base:5.0 -f Dockerfile.all_base .
 
 
 build_manager:
-	docker build --no-cache=true -t neuvector/build_manager:latest -f Dockerfile.build_manager .
+	docker build --no-cache=true -t neuvector/build_manager:5.0 -f Dockerfile.build_manager .
 
 build_fleet:
-	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
+	docker build --no-cache=true -t neuvector/build_fleet:5.0 -f Dockerfile.build_fleet .
+
+push_build_manager:
+	docker push neuvector/build_manager:5.0
+
+push_build_fleet:
+	docker push neuvector/build_fleet:5.0
