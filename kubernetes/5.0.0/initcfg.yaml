@@ -305,6 +305,13 @@ data:
     Xff_Enabled: true
     Net_Service_Status: false
     Net_Service_Policy_Mode: Discover
+    Scanner_Autoscale:
+    # Optional. Choose between immediate or delayed or empty string
+      Strategy: 
+      Min_Pods: 1
+      Max_Pods: 3
+    # Optional. true or false or empty string(false)
+    No_Telemetry_Report: false
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
