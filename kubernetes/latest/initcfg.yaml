@@ -41,9 +41,6 @@ data:
           write: true
         - id: ci_scan
           write: true
-        - id: cloud
-          read: true
-          write: true
         - id: rt_policy
           read: true
           write: true
@@ -65,10 +62,6 @@ data:
         - id: authorization
           read: true
           write: true
-  eulainitcfg.yaml: |
-    # Optional. true or false or empty string(false)
-    always_reload: false
-    license_key : 0Bca63Iy2FiXGqjk...
   ldapinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
