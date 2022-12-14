@@ -19,7 +19,7 @@ stage_fleet_base:
 stage_scan_base: stage_fleet_base
 
 stage_ctrl_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/consul.1.11.9.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	gzip -cd prebuild/binary/opa.0.46.1.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
@@ -28,7 +28,7 @@ stage_ctrl_base: stage_fleet_base
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.3.gz > ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/consul.1.11.9.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
