@@ -41,9 +41,6 @@ data:
           write: true
         - id: ci_scan
           write: true
-        - id: cloud
-          read: true
-          write: true
         - id: rt_policy
           read: true
           write: true
@@ -65,10 +62,6 @@ data:
         - id: authorization
           read: true
           write: true
-  eulainitcfg.yaml: |
-    # Optional. true or false or empty string(false)
-    always_reload: false
-    license_key : 0Bca63Iy2FiXGqjk...
   ldapinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
@@ -305,6 +298,13 @@ data:
     Xff_Enabled: true
     Net_Service_Status: false
     Net_Service_Policy_Mode: Discover
+    Scanner_Autoscale:
+    # Optional. Choose between immediate or delayed or empty string
+      Strategy: 
+      Min_Pods: 1
+      Max_Pods: 3
+    # Optional. true or false or empty string(false)
+    No_Telemetry_Report: false
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
