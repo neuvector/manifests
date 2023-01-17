@@ -4,7 +4,7 @@ MAINTAINER support@neuvector.com
 COPY stage /
 
 RUN apk --update add ca-certificates ethtool lsof procps curl jq supervisor && \
-    apk add --allow-untrusted /glibc-2.33-r0.apk && apk update && \
+    apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && \
     rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk && \
     ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/glibc-compat/lib/libpcre.so.3 && \
     ln -s /usr/local/bin/libstdc++.so.6.0.19 /usr/local/bin/libstdc++.so.6 && \
