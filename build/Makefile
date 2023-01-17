@@ -21,7 +21,7 @@ stage_scan_base: stage_fleet_base
 stage_ctrl_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul.1.11.9.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
-	gzip -cd prebuild/binary/opa.0.46.1.gz > ${STAGE_DIR}/usr/local/bin/opa
+	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
 	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
