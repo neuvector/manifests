@@ -32,6 +32,7 @@ stage_enf_base: stage_fleet_base
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
+	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
 	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
 	cp prebuild/binary/libstdc++.so.6.0.19 ${STAGE_DIR}/usr/local/bin/
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
