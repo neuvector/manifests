@@ -1,15 +1,15 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: nvsecurityrules.neuvector.com
+  name: settings.neuvector.com
 spec:
   group: neuvector.com
   names:
-    kind: NvSecurityRule
-    listKind: NvSecurityRuleList
-    plural: nvsecurityrules
-    singular: nvsecurityrule
-  scope: Namespaced
+    kind: Setting
+    listKind: SettingList
+    plural: settings
+    singular: setting
+  scope: Cluster
   version: v1
   versions:
   - name: v1
@@ -19,14 +19,14 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: nvclustersecurityrules.neuvector.com
+  name: neuvectorusernotifications.neuvector.com
 spec:
   group: neuvector.com
   names:
-    kind: NvClusterSecurityRule
-    listKind: NvClusterSecurityRuleList
-    plural: nvclustersecurityrules
-    singular: nvclustersecurityrule
+    kind: NeuvectorUserNotification
+    listKind: NeuvectorUserNotificationList
+    plural: neuvectorusernotifications
+    singular: neuvectorusernotification
   scope: Cluster
   version: v1
   versions:

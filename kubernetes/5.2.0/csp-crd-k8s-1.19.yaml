@@ -1,0 +1,56 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: settings.neuvector.com
+spec:
+  group: neuvector.com
+  names:
+    kind: Setting
+    listKind: SettingList
+    plural: settings
+    singular: setting
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          customized:
+            type: boolean
+          value:
+            nullable: true
+            type: string
+          default:
+            nullable: true
+            type: string
+          source:
+            nullable: true
+            type: string
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: neuvectorusernotifications.neuvector.com
+spec:
+  group: neuvector.com
+  names:
+    kind: NeuvectorUserNotification
+    listKind: NeuvectorUserNotificationList
+    plural: neuvectorusernotifications
+    singular: neuvectorusernotification
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          componentName:
+            type: string
+          message:
+            type: string
+        type: object
+    served: true
+    storage: true
