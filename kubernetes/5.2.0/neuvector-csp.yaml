@@ -21,7 +21,7 @@ rules:
 - apiGroups:
   - neuvector.com
   resources:
-  - neuvectorusage
+  - neuvectorusages
   resourceNames:
   - value
   - version
