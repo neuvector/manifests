@@ -138,5 +138,5 @@ spec:
           value: 'server-version'
         image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
         name: nv-csp-adapter
-        imagePullPolicy: "IfNotPresent"
+        imagePullPolicy: "Always"
       serviceAccountName: nv-csp-adapter
