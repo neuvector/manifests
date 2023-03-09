@@ -8,7 +8,7 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: nv-csp-adapter
+  name: neuvector-csp-adapter
   namespace: neuvector-csp-adapter-system
 #  annotations:
 #    eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.aws.accountNumber }}:role/{{ .Values.aws.roleName }}
@@ -16,7 +16,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: nv-csp-adapter-cluster-role
+  name: neuvector-csp-adapter-cluster-role
 rules:
 - apiGroups:
   - neuvector.com
@@ -46,23 +46,23 @@ rules:
   - list
   - watch
 ---
-apiVersion: rbac.authorization.k8s.io/v1   
-kind: ClusterRoleBinding 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
-  name: nv-csp-adapter-crb
-roleRef:                                         
-  apiGroup: rbac.authorization.k8s.io          
-  kind: ClusterRole                           
-  name: nv-csp-adapter-cluster-role
+  name: neuvector-csp-adapter-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: neuvector-csp-adapter-cluster-role
 subjects:
   - kind: ServiceAccount
-    name: nv-csp-adapter
+    name: neuvector-csp-adapter
     namespace: neuvector-csp-adapter-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: nv-csp-adapter-role
+  name: neuvector-csp-adapter-role
   namespace: neuvector-csp-adapter-system
 rules:
 - apiGroups:
@@ -97,30 +97,30 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: nv-csp-adapter-binding
+  name: neuvector-csp-adapter-binding
   namespace: neuvector-csp-adapter-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: nv-csp-adapter-role
+  name: neuvector-csp-adapter-role
 subjects:
   - kind: ServiceAccount
-    name: nv-csp-adapter
+    name: neuvector-csp-adapter
     namespace: neuvector-csp-adapter-system
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nv-csp-adapter
+  name: neuvector-csp-adapter
   namespace: neuvector-csp-adapter-system
 spec:
   selector:
     matchLabels:
-      app: nv-csp-adapter
+      app: neuvector-csp-adapter
   template:
     metadata:
       labels:
-        app: nv-csp-adapter
+        app: neuvector-csp-adapter
     spec:
       containers:
       - env:
@@ -137,6 +137,6 @@ spec:
         - name: K8S_NEUVECTOR_VERSION_SETTING
           value: 'server-version'
         image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
-        name: nv-csp-adapter
+        name: neuvector-csp-adapter
         imagePullPolicy: "Always"
-      serviceAccountName: nv-csp-adapter
+      serviceAccountName: neuvector-csp-adapter
