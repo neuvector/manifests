@@ -1,14 +1,16 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: neuvectorusages.neuvector.com
+  name: neuvectorusagerecords.neuvector.com
 spec:
   group: neuvector.com
   names:
-    kind: NeuvectorUsage
-    listKind: NeuvectorUsageList
-    plural: neuvectorusages
-    singular: neuvectorusage
+    kind: NeuvectorUsageRecord
+    listKind: NeuvectorUsageRecordList
+    plural: neuvectorusagerecords
+    singular: neuvectorusagerecord
+    shortNames:
+      - nur
   scope: Cluster
   version: v1
   versions:
