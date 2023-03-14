@@ -305,6 +305,9 @@ data:
       Max_Pods: 3
     # Optional. true or false or empty string(false)
     No_Telemetry_Report: false
+    Scan_Config:
+      # Optional. true or false or empty string(false)
+      Auto_Scan: false
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
