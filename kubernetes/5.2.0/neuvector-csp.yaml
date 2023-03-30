@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: neuvector-csp-adapter-system
+  labels:
+    name: neuvector-csp-adapter-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: neuvector-csp-adapter
+  namespace: neuvector-csp-adapter-system
+#  annotations:
+#    eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.aws.accountNumber }}:role/{{ .Values.aws.roleName }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: neuvector-csp-adapter-cluster-role
+rules:
+- apiGroups:
+  - neuvector.com
+  resources:
+  - neuvectorusages
+  resourceNames:
+  - value
+  - version
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiregistration.k8s.io
+  resources:
+  - apiservices
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: neuvector-csp-adapter-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: neuvector-csp-adapter-cluster-role
+subjects:
+  - kind: ServiceAccount
+    name: neuvector-csp-adapter
+    namespace: neuvector-csp-adapter-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: neuvector-csp-adapter-role
+  namespace: neuvector-csp-adapter-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  resourceNames:
+  - csp-adapter-cache
+  verbs:
+  - "*"
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  resourceNames:
+  - csp-config
+  verbs:
+  - "*"
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: neuvector-csp-adapter-binding
+  namespace: neuvector-csp-adapter-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: neuvector-csp-adapter-role
+subjects:
+  - kind: ServiceAccount
+    name: neuvector-csp-adapter
+    namespace: neuvector-csp-adapter-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neuvector-csp-adapter
+  namespace: neuvector-csp-adapter-system
+spec:
+  selector:
+    matchLabels:
+      app: neuvector-csp-adapter
+  template:
+    metadata:
+      labels:
+        app: neuvector-csp-adapter
+    spec:
+      containers:
+      - env:
+        - name: NEUVECTOR_DEBUG
+          value: "True"
+        - name: K8S_OUTPUT_CONFIGMAP
+          value: 'csp-config'
+        - name: K8S_OUTPUT_NOTIFICATION
+          value: 'csp-compliance'
+        - name: K8S_CACHE_SECRET
+          value: 'csp-adapter-cache'
+        - name: K8S_HOSTNAME_SETTING
+          value: 'server-url'
+        - name: K8S_NEUVECTOR_VERSION_SETTING
+          value: 'server-version'
+        image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
+        name: neuvector-csp-adapter
+        imagePullPolicy: "Always"
+      serviceAccountName: neuvector-csp-adapter
