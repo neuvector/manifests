@@ -72,3 +72,4 @@ build_manager:
 
 build_fleet:
 	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
+	docker build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .
