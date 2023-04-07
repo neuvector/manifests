@@ -195,6 +195,12 @@ data:
       MIIC8DCCAdigAwIBAgIQSMNDFv5HI7RPgF0uHW8YJDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
       ...
       -----END CERTIFICATE-----
+    x509_cert_extra:
+      - |
+        -----BEGIN CERTIFICATE-----
+        MIIC8DCCAdigAwIBAgIQSMNDFv5HI7RPgF0uHW8YJDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+        ...
+        -----END CERTIFICATE-----
     # Optional. empty or string(group filter info)
     GroupClaim:  
     # Optional. true or false or empty string(false)
