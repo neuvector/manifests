@@ -10,7 +10,7 @@ spec:
     plural: neuvectorusagerecords
     singular: neuvectorusagerecord
     shortNames:
-      - nur
+    - nur
   scope: Cluster
   version: v1
   versions:

@@ -128,14 +128,10 @@ spec:
           value: "True"
         - name: K8S_OUTPUT_CONFIGMAP
           value: 'csp-config'
-        - name: K8S_OUTPUT_NOTIFICATION
-          value: 'csp-compliance'
         - name: K8S_CACHE_SECRET
           value: 'csp-adapter-cache'
-        - name: K8S_HOSTNAME_SETTING
-          value: 'server-url'
-        - name: K8S_NEUVECTOR_VERSION_SETTING
-          value: 'server-version'
+        - name: K8S_ADAPTER_NAMESPACE
+          value: 'neuvector'
         image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
         name: neuvector-csp-adapter
         imagePullPolicy: "Always"
