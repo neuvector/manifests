@@ -88,7 +88,7 @@ spec:
     spec:
       containers:
         - name: neuvector-manager-pod
-          image: neuvector/manager:5.1.1
+          image: neuvector/manager:5.1.2
           env:
             - name: CTRL_SERVER_IP
               value: neuvector-svc-controller.neuvector
@@ -131,7 +131,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: neuvector-controller-pod
-          image: neuvector/controller:5.1.1
+          image: neuvector/controller:5.1.2
           securityContext:
             privileged: true
           readinessProbe:
@@ -219,7 +219,7 @@ spec:
       hostPID: true
       containers:
         - name: neuvector-enforcer-pod
-          image: neuvector/enforcer:5.1.1
+          image: neuvector/enforcer:5.1.2
           securityContext:
             privileged: true
           env:
