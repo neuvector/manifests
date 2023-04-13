@@ -17,13 +17,13 @@ spec:
     schema:
       openAPIV3Schema:
         properties:
-          nodes:
+          managed_node_count:
             type: integer
-          timestamp:
+          reporting_time:
             type: string
         required:
-          - nodes
-          - timestamp
+          - managed_node_count
+          - reporting_time
         type: object
     served: true
     storage: true

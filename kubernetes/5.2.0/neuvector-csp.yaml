@@ -1,15 +1,8 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: neuvector-csp-adapter-system
-  labels:
-    name: neuvector-csp-adapter-system
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: neuvector-csp-adapter
-  namespace: neuvector-csp-adapter-system
+  name: csp
+  namespace: neuvector
 #  annotations:
 #    eks.amazonaws.com/role-arn: arn:aws:iam::{{ .Values.aws.accountNumber }}:role/{{ .Values.aws.roleName }}
 ---
@@ -56,14 +49,14 @@ roleRef:
   name: neuvector-csp-adapter-cluster-role
 subjects:
   - kind: ServiceAccount
-    name: neuvector-csp-adapter
-    namespace: neuvector-csp-adapter-system
+    name: csp
+    namespace: neuvector
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: neuvector-csp-adapter-role
-  namespace: neuvector-csp-adapter-system
+  namespace: neuvector
 rules:
 - apiGroups:
   - ""
@@ -98,41 +91,42 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: neuvector-csp-adapter-binding
-  namespace: neuvector-csp-adapter-system
+  namespace: neuvector
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: neuvector-csp-adapter-role
 subjects:
   - kind: ServiceAccount
-    name: neuvector-csp-adapter
-    namespace: neuvector-csp-adapter-system
+    name: csp
+    namespace: neuvector
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: neuvector-csp-adapter
-  namespace: neuvector-csp-adapter-system
+  name: neuvector-csp-pod
+  namespace: neuvector
 spec:
   selector:
     matchLabels:
-      app: neuvector-csp-adapter
+      app: neuvector-csp-pod
   template:
     metadata:
       labels:
-        app: neuvector-csp-adapter
+        app: neuvector-csp-pod
     spec:
       containers:
       - env:
         - name: NEUVECTOR_DEBUG
           value: "True"
-        - name: K8S_OUTPUT_CONFIGMAP
+        - name: CSP_CONFIGMAP
           value: 'csp-config'
-        - name: K8S_CACHE_SECRET
+        - name: CACHE_SECRET
           value: 'csp-adapter-cache'
-        - name: K8S_ADAPTER_NAMESPACE
+        - name: ADAPTER_NAMESPACE
           value: 'neuvector'
         image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
-        name: neuvector-csp-adapter
+        name: neuvector-csp-pod
         imagePullPolicy: "Always"
-      serviceAccountName: neuvector-csp-adapter
+      serviceAccount: csp
+      serviceAccountName: csp
