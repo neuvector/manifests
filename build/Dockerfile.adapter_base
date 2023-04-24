@@ -1,8 +1,5 @@
-FROM alpine:3.18.3
+FROM registry.suse.com/bci/bci-micro:15.5
+
 MAINTAINER support@neuvector.com
 
 COPY stage /
-
-RUN apk --update add ca-certificates && apk del iptables && \
-    apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && \
-    rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk

@@ -1,0 +1,9 @@
+FROM registry.suse.com/bci/bci-base:15.4
+
+ARG build_version
+RUN zypper -n update
+RUN zypper -n install golang git
+WORKDIR /build
+RUN git clone https://github.com/open-policy-agent/opa.git
+WORKDIR /build/opa
+RUN git checkout ${build_version} && go build

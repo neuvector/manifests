@@ -1,4 +1,19 @@
 STAGE_DIR = stage
+BUILD_IMAGE_TAG = latest
+
+stage_build_opa:
+	docker build -t neuvector/build_opa -f Dockerfile.build_opa --build-arg build_version=v0.52.0 .
+	set -e ; \
+	container_id=$$(docker create "neuvector/build_opa:latest") ; \
+	docker cp "$$container_id:/build/opa/opa" . ; \
+	docker rm "$$container_id"
+
+stage_build_consul:
+	docker build -t neuvector/build_consul -f Dockerfile.build_consul --build-arg build_version=v1.15.2 .
+	set -e ;\
+	container_id=$$(docker create "neuvector/build_consul:latest") ; \
+	docker cp "$$container_id:/build/consul/consul" . ; \
+	docker rm "$$container_id"
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
@@ -10,7 +25,6 @@ stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/usr/lib
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/internal/
-	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
 	cp .nvcontainer ${STAGE_DIR}/usr/local/bin/
 	cp prebuild/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp prebuild/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
@@ -18,29 +32,17 @@ stage_fleet_base:
 
 stage_scan_base: stage_fleet_base
 
-stage_ctrl_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
+stage_ctrl_base: stage_fleet_base stage_build_opa stage_build_consul 
+	cp consul ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
-	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
+	cp opa ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
 	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
-stage_enf_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
+stage_enf_base: stage_fleet_base stage_build_consul
+	cp consul ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
-	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
-	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
-	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
-	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libstdc++.so.6.0.19 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/liburcu.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu.so.2
-	cp prebuild/binary/liburcu-cds.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu-cds.so.2
-	cp prebuild/binary/libnfnetlink.so.0.2.0 ${STAGE_DIR}/usr/local/bin/libnfnetlink.so.0.2.0
-	cp prebuild/binary/libnetfilter_queue.so.1.5.0 ${STAGE_DIR}/usr/local/bin/libnetfilter_queue.so.1.5.0
-	cp prebuild/binary/libmnl.so.0.1.0 ${STAGE_DIR}/usr/local/bin/libmnl.so.0.1.0
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
@@ -76,8 +78,8 @@ all_base: stage_init stage_enf_base stage_ctrl_base
 
 
 build_manager:
-	docker build --no-cache=true -t neuvector/build_manager:latest -f Dockerfile.build_manager .
+	docker buildx build --no-cache=true -t neuvector/build_manager:latest -f Dockerfile.build_manager .
 
 build_fleet:
-	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
-	docker build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .
+	docker buildx build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
+	docker buildx build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .

@@ -1,21 +1,26 @@
-FROM ubuntu:18.04
+FROM opensuse/leap:15.5
+
 MAINTAINER gduan@neuvector.com
 
 # Dockerfile to create container to build binaries
 
-ENV DEBIAN_FRONTEND noninteractive
+RUN zypper -n update && zypper -n install autoconf libtool libpcap-devel bzr curl upx wget zip git pcre-devel
+RUN zypper -n install libmnl-devel libnetfilter_queue-devel liburcu-devel pcre2-devel libjansson-devel gzip make gcc
 
-RUN apt-get update && apt-get install -y build-essential autoconf libtool libpcap-dev libpcre++-dev bzr curl upx wget zip git
+RUN zypper addrepo https://download.opensuse.org/repositories/openSUSE:Backports:SLE-15-SP5/step/openSUSE:Backports:SLE-15-SP5.repo
+RUN zypper -n --gpg-auto-import-keys install vectorscan-devel libhs5-vectorscan5
 
-RUN apt-get install -y debconf-utils software-properties-common && \
-    apt-get install -y libnfnetlink-dev libnetfilter-queue-dev libmnl-dev
+RUN zypper -n install glibc-devel glibc-devel-static
 
 # Fleet
 ENV GOPATH /go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
-RUN curl -o /tmp/golang.tar.gz -fL https://go.dev/dl/go1.14.15.linux-amd64.tar.gz
+ARG TARGETARCH
+RUN curl -o /tmp/golang.tar.gz -fL "https://go.dev/dl/go1.14.15.linux-$TARGETARCH.tar.gz"
 RUN tar -C /usr/local -xzf /tmp/golang.tar.gz && rm /tmp/golang.tar.gz && \
     mkdir -p $GOPATH/src/neuvector.com && mkdir -p $GOPATH/bin
 
+RUN zypper clean --all
 COPY build.sh /
+

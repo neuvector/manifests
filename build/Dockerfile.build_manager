@@ -1,30 +1,25 @@
-FROM ubuntu:22.04
+FROM opensuse/leap:15.4
 
 # Dockerfile to create container to build binaries
 
-RUN apt-get update || true
-
+ARG TARGETPLATFORM
 # Manager
-RUN apt-get install -y wget curl zip git default-jdk && \
-    apt-get install apt-transport-https
 
-RUN curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs && \
-    chmod +x cs && \
+RUN zypper ref && zypper in -y wget curl zip git java-11-openjdk-devel gzip python3 gcc gcc-c++ make
+
+
+RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; \
+    then curl -fL https://github.com/coursier/launchers/raw/master/cs-aarch64-pc-linux.gz; \
+    else curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz; fi \
+    | gzip -d > cs && chmod +x cs && \
     export PATH="$PATH:/root/.local/share/coursier/bin" && \
     ./cs install scala:2.11.12 sbt:1.6.2 --install-dir /usr/local/bin
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -uy nodejs && \
+RUN zypper in -y nodejs16 npm16 && \
     npm install -g @angular/cli@13 && \
     npm install -g npm-force-resolutions
 
 # Manager unitest
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
-
-# Fix for sbt failure, an ubuntu issue
-RUN sed -i 's/pkcs12/jks/g' /etc/java-11-openjdk/security/java.security && \
-    dpkg --purge --force-depends ca-certificates-java && \
-    apt-get install ca-certificates-java
+RUN zypper in -y chromium
 
 COPY build.sh /

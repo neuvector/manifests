@@ -1,20 +1,14 @@
-FROM alpine:3.18.3
+FROM registry.suse.com/bci/bci-base:15.4
 MAINTAINER support@neuvector.com
 
 COPY stage /
 
-ENV JAVA_VERSION=11.0.20_p8-r0 \
-    JAVA_ALPINE_VERSION=11.0.20_p8-r0 \
-    JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
-    PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
-    LANG=C.UTF-8 \
+ENV LANG=C.UTF-8 \
 	PYTHONUNBUFFERED=1
 
-RUN apk add --no-cache python3 && ln -sf python3 /usr/bin/python && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    pip3 install --no-cache-dir -r /requirements.txt && \
-    rm -r /root/.cache
-RUN set -x && apk add --update ca-certificates iproute2 lsof procps openjdk11-jre="$JAVA_ALPINE_VERSION" && apk update && \
-    rm -rf /tmp/* /var/cache/apk/* /requirements.txt
+RUN zypper in -y python310 python310-pip python310-setuptools && \
+    ln -sf /usr/bin/python3.10 /usr/bin/python && \
+    python -m pip install --no-cache-dir -r /requirements.txt
+
+RUN zypper in -y iproute2 lsof procps java-11-openjdk-headless && \
+   rm -rf /tmp/* /requirements.txt

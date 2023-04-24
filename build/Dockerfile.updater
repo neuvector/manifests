@@ -1,11 +1,10 @@
-FROM alpine:3.18.3
+FROM registry.suse.com/bci/bci-base:15.5
+
 MAINTAINER support@neuvector.com
 
 LABEL neuvector.image="neuvector/updater" \
       neuvector.role="updater"
 
-RUN apk --update add ca-certificates curl && \
-    apk upgrade && \
-    rm -rf /tmp/* && rm -rf /var/cache/apk/*
+RUN zypper ref && zypper in -y curl
 
 ENTRYPOINT ["sleep", "30"]

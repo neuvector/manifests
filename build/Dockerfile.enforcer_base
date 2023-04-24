@@ -1,13 +1,16 @@
-FROM alpine:3.18.3
+FROM registry.suse.com/bci/bci-base:15.5
+
 MAINTAINER support@neuvector.com
 
 COPY stage /
 
-RUN apk --update add ca-certificates iproute2 ethtool lsof procps curl jq && apk del iptables && \
-    apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && \
-    rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk && \
-    ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/glibc-compat/lib/libpcre.so.3 && \
-    ln -s /usr/local/bin/libstdc++.so.6.0.19 /usr/local/bin/libstdc++.so.6 && \
-    ln -s /usr/local/bin/libnfnetlink.so.0.2.0 /usr/local/bin/libnfnetlink.so.0 && \
-    ln -s /usr/local/bin/libnetfilter_queue.so.1.5.0 /usr/local/bin/libnetfilter_queue.so.1 && \
-    ln -s /usr/local/bin/libmnl.so.0.1.0 /usr/local/bin/libmnl.so.0
+RUN zypper -n update
+RUN zypper -n install ca-certificates iproute2 ethtool lsof procps curl jq
+RUN zypper -n install libpcre2-8-0 libnfnetlink0 libnetfilter_queue1 libmnl0 tcpdump libjansson4
+
+RUN zypper addrepo https://download.opensuse.org/repositories/openSUSE:Backports:SLE-15-SP5:Update/standard/openSUSE:Backports:SLE-15-SP5:Update.repo
+RUN zypper -n --gpg-auto-import-keys refresh
+RUN zypper -n --gpg-auto-import-keys install libhs5-vectorscan5
+
+RUN zypper -n clean --all 
+
