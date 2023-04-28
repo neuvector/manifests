@@ -117,15 +117,9 @@ spec:
     spec:
       containers:
       - env:
-        - name: NEUVECTOR_DEBUG
-          value: "True"
-        - name: CSP_CONFIGMAP
-          value: 'csp-config'
-        - name: CACHE_SECRET
-          value: 'csp-adapter-cache'
         - name: ADAPTER_NAMESPACE
           value: 'neuvector'
-        image: registry.opensuse.org/home/seanmarlow/containers/containers/cloud/tools/csp-adapter-container:latest
+        image: registry.opensuse.org/home/seanmarlow/containers/containers/csp-billing-adapter-container:latest
         name: neuvector-csp-pod
         imagePullPolicy: "Always"
       serviceAccount: csp
