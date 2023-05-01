@@ -254,8 +254,14 @@ data:
     New_Service_Profile_Baseline: basic
     # Optional. input valid ipv4 address or empty string
     Syslog_ip: 1.2.3.4
-    # Optional. input 17 or 6 here for upd or tcp or empty string(17)
+    # Optional. input 17, 6 or 66 here for udp, tcp, tcp+tls or empty string(17)
     Syslog_IP_Proto: 17
+    # Optional. it is required when Syslog_IP_Proto is 66 only
+    Syslog_Server_Cert: |
+      -----BEGIN CERTIFICATE-----
+      MIIC8DCCAdigAwIBAgIQSMNDFv5HI7RPgF0uHW8YJDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+      ...
+      -----END CERTIFICATE-----
     # Optional. empty string(514)
     Syslog_Port: 514
     # Optional. chose between Alert/Critical/Error/Warning/Notice/Info/Debug or empty string(Info)
