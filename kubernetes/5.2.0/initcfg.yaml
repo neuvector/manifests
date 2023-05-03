@@ -20,6 +20,8 @@ data:
       password_expire_after_days: 0
       enable_password_history: false
       password_keep_history_count: 0
+      # Optional. value between 30 -- 3600  default 300
+      session_timeout: 300
   roleinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
