@@ -244,6 +244,8 @@ data:
     always_reload: false
     # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
     New_Service_Policy_Mode: Discover
+    # Optional. zero-drift or basic or empty string(zero-drift)
+    New_Service_Profile_Baseline: basic
     # Optional. input valid ipv4 address or empty string
     Syslog_ip: 1.2.3.4
     # Optional. input 17 or 6 here for upd or tcp or empty string(17)

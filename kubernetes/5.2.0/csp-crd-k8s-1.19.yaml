@@ -10,25 +10,20 @@ spec:
     plural: neuvectorusagerecords
     singular: neuvectorusagerecord
     shortNames:
-      - nur
+    - nur
   scope: Cluster
   versions:
   - name: v1
     schema:
       openAPIV3Schema:
         properties:
-          usage:
+          managed_node_count:
             type: integer
-          extensions:
-            type: string
-          version:
-            type: string
-          timestamp:
+          reporting_time:
             type: string
         required:
-          - usage
-          - version
-          - timestamp
+          - managed_node_count
+          - reporting_time
         type: object
     served: true
     storage: true
