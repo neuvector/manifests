@@ -1,4 +1,4 @@
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 MAINTAINER support@neuvector.com
 
 LABEL neuvector.image="neuvector/updater" \

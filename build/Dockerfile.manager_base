@@ -1,10 +1,10 @@
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 MAINTAINER support@neuvector.com
 
 COPY stage /
 
-ENV JAVA_VERSION=11.0.19_p7-r0 \
-    JAVA_ALPINE_VERSION=11.0.19_p7-r0 \
+ENV JAVA_VERSION=11.0.19_p7-r1 \
+    JAVA_ALPINE_VERSION=11.0.19_p7-r1 \
     JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
     PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
     LANG=C.UTF-8 \
