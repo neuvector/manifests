@@ -14,30 +14,11 @@ rules:
 - apiGroups:
   - neuvector.com
   resources:
-  - neuvectorusages
+  - neuvectorusagerecords
   resourceNames:
-  - value
-  - version
+  - neuvector-usage
   verbs:
   - get
-  - list
-  - watch
-- apiGroups:
-  - apiregistration.k8s.io
-  resources:
-  - apiservices
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - apiextensions.k8s.io
-  resources:
-  - customresourcedefinitions
-  verbs:
-  - get
-  - list
-  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -119,7 +100,15 @@ spec:
       - env:
         - name: ADAPTER_NAMESPACE
           value: 'neuvector'
-        image: registry.opensuse.org/home/seanmarlow/containers/containers/csp-billing-adapter-container:latest
+        - name: USAGE_CRD_PLURAL
+          value: "neuvectorusagerecords"
+        - name: USAGE_RESOURCE
+          value: "neuvector-usage"
+        - name: USAGE_API_VERSION
+          value: "v1"
+        - name: USAGE_API_GROUP
+          value: "neuvector.com"
+        image: registry.opensuse.org/home/seanmarlow/containers/containers/csp-billing-adapter-container-local:latest
         name: neuvector-csp-pod
         imagePullPolicy: "Always"
       serviceAccount: csp
