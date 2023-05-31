@@ -48,6 +48,11 @@ stage_mgr_base:
 	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp requirements.txt ${STAGE_DIR}/
 
+stage_adpt_base: stage_fleet_base
+	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
+	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+
 updater:
 	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
 
@@ -62,6 +67,9 @@ enforcer_base: stage_init stage_enf_base
 
 manager_base: stage_init stage_mgr_base
 	docker build --no-cache=true -t neuvector/manager_base -f Dockerfile.manager_base .
+
+adapter_base: stage_init stage_adpt_base
+	docker build --no-cache=true -t neuvector/adapter_base -f Dockerfile.adapter_base .
 
 all_base: stage_init stage_enf_base stage_ctrl_base
 	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .

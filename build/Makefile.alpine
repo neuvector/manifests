@@ -8,6 +8,7 @@ base:
 	$(MAKE)	manager_base
 	$(MAKE)	all_base
 	$(MAKE)	scanner_base
+	$(MAKE)	adapter_base
 	$(MAKE)	updater
 
 push:
@@ -16,4 +17,5 @@ push:
 	docker push neuvector/manager_base:latest
 	docker push neuvector/all_base:latest
 	docker push neuvector/scanner_base:latest
+	docker push neuvector/adapter_base:latest
 	docker push neuvector/updater:latest
