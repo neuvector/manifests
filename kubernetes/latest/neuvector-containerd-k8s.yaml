@@ -133,7 +133,7 @@ spec:
       serviceAccountName: basic
       containers:
         - name: neuvector-registry-adapter-pod
-          image: neuvector/registry-adapter:5.2.0
+          image: neuvector/registry-adapter:0.1.0
           imagePullPolicy: Always
           env:
             - name: CLUSTER_JOIN_ADDR
