@@ -275,13 +275,11 @@ data:
       - event
       - security-event
       - audit
-    Syslog_in_json: 
-    # Optional. true, false, empty, unconfigured.
-    #  true = In Json: checkbox enabled from Settings > Configuration > Syslog
-    #  false, empty, unconfigured = In Json: checkbox disabled from Settings > Configuration > Syslog
-    #
     # Optional. true or false or empty string(false)
+    Syslog_in_json:
     Auth_By_Platform: false
+    single_cve_per_syslog: false
+    syslog_cve_in_layers: false
     # Optional
     Webhooks:
       - name: myslack
