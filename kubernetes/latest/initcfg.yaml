@@ -276,7 +276,7 @@ data:
       - security-event
       - audit
     # Optional. true or false or empty string(false)
-    Syslog_in_json:
+    Syslog_in_json: false
     Auth_By_Platform: false
     single_cve_per_syslog: false
     syslog_cve_in_layers: false
