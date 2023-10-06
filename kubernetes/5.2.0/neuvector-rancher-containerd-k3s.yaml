@@ -52,22 +52,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: neuvector-service-registry-adapter
-  namespace: neuvector
-spec:
-  ports:
-  - port: 9443
-    name: registry-adapter
-    protocol: TCP
-  type: LoadBalancer
-  selector:
-    app: neuvector-registry-adapter-pod
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
   name: neuvector-svc-controller
   namespace: neuvector
 spec:
@@ -106,50 +90,10 @@ spec:
       serviceAccount: basic
       containers:
         - name: neuvector-manager-pod
-          image: neuvector/manager:5.2.0
+          image: neuvector/manager:5.2.2
           env:
             - name: CTRL_SERVER_IP
               value: neuvector-svc-controller.neuvector
-      restartPolicy: Always
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: neuvector-registry-adapter-pod
-  namespace: neuvector
-spec:
-  selector:
-    matchLabels:
-      app: neuvector-registry-adapter-pod
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: neuvector-registry-adapter-pod
-    spec:
-      serviceAccount: basic
-      serviceAccountName: basic
-      containers:
-        - name: neuvector-registry-adapter-pod
-          image: neuvector/registry-adapter:0.1.0
-          imagePullPolicy: Always
-          env:
-            - name: CLUSTER_JOIN_ADDR
-              value: neuvector-svc-controller.neuvector
-            - name: HARBOR_SERVER_PROTO
-              value: https
-            - name: HARBOR_BASIC_AUTH_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: neuvector-registry-adapter
-                  key: username
-            - name: HARBOR_BASIC_AUTH_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: neuvector-registry-adapter
-                  key: password
       restartPolicy: Always
 
 ---
@@ -191,7 +135,7 @@ spec:
       serviceAccount: controller
       containers:
         - name: neuvector-controller-pod
-          image: neuvector/controller:5.2.0
+          image: neuvector/controller:5.2.2
           securityContext:
             privileged: true
           readinessProbe:
@@ -225,6 +169,9 @@ spec:
             - mountPath: /host/cgroup
               name: cgroup-vol
               readOnly: true
+            - mountPath: /var/nv_debug
+              name: nv-debug
+              readOnly: false
             - mountPath: /etc/config
               name: config-volume
               readOnly: true
@@ -243,6 +190,9 @@ spec:
         - name: cgroup-vol
           hostPath:
             path: /sys/fs/cgroup
+        - name: nv-debug
+          hostPath:
+            path: /var/nv_debug
         - name: config-volume
           projected:
             sources:
@@ -281,7 +231,7 @@ spec:
       serviceAccount: enforcer
       containers:
         - name: neuvector-enforcer-pod
-          image: neuvector/enforcer:5.2.0
+          image: neuvector/enforcer:5.2.2
           securityContext:
             privileged: true
           env:
@@ -308,6 +258,9 @@ spec:
             - mountPath: /host/cgroup
               name: cgroup-vol
               readOnly: true
+            - mountPath: /var/nv_debug
+              name: nv-debug
+              readOnly: false
       terminationGracePeriodSeconds: 1200
       restartPolicy: Always
       volumes:
@@ -323,6 +276,9 @@ spec:
         - name: cgroup-vol
           hostPath:
             path: /sys/fs/cgroup
+        - name: nv-debug
+          hostPath:
+            path: /var/nv_debug
 
 ---
 
