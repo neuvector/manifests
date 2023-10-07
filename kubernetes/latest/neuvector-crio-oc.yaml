@@ -53,22 +53,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: neuvector-service-registry-adapter
-  namespace: neuvector
-spec:
-  ports:
-  - port: 9443
-    name: registry-adapter
-    protocol: TCP
-  type: LoadBalancer
-  selector:
-    app: neuvector-registry-adapter-pod
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
   name: neuvector-svc-controller
   namespace: neuvector
 spec:
@@ -104,22 +88,6 @@ spec:
 
 ---
 
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: neuvector-route-registry-adapter
-  namespace: neuvector
-spec:
-  to:
-    kind: Service
-    name: neuvector-service-registry-adapter
-  port:
-    targetPort: registry-adapter
-  tls:
-    termination: passthrough
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -143,46 +111,6 @@ spec:
           env:
             - name: CTRL_SERVER_IP
               value: neuvector-svc-controller.neuvector
-      restartPolicy: Always
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: neuvector-registry-adapter-pod
-  namespace: neuvector
-spec:
-  selector:
-    matchLabels:
-      app: neuvector-registry-adapter-pod
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: neuvector-registry-adapter-pod
-    spec:
-      serviceAccount: basic
-      serviceAccountName: basic
-      containers:
-        - name: neuvector-registry-adapter-pod
-          image: image-registry.openshift-image-registry.svc:5000/neuvector/registry-adapter:<version>
-          imagePullPolicy: Always
-          env:
-            - name: CLUSTER_JOIN_ADDR
-              value: neuvector-svc-controller.neuvector
-            - name: HARBOR_SERVER_PROTO
-              value: https
-            - name: HARBOR_BASIC_AUTH_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: neuvector-registry-adapter
-                  key: username
-            - name: HARBOR_BASIC_AUTH_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: neuvector-registry-adapter
-                  key: password
       restartPolicy: Always
 
 ---
@@ -258,6 +186,9 @@ spec:
             - mountPath: /host/cgroup
               name: cgroup-vol
               readOnly: true
+            - mountPath: /var/nv_debug
+              name: nv-debug
+              readOnly: false
             - mountPath: /etc/config
               name: config-volume
               readOnly: true
@@ -276,6 +207,9 @@ spec:
         - name: cgroup-vol
           hostPath:
             path: /sys/fs/cgroup
+        - name: nv-debug
+          hostPath:
+            path: /var/nv_debug
         - name: config-volume
           projected:
             sources:
@@ -341,6 +275,9 @@ spec:
             - mountPath: /host/cgroup
               name: cgroup-vol
               readOnly: true
+            - mountPath: /var/nv_debug
+              name: nv-debug
+              readOnly: false
       terminationGracePeriodSeconds: 1200
       restartPolicy: Always
       volumes:
@@ -356,6 +293,9 @@ spec:
         - name: cgroup-vol
           hostPath:
             path: /sys/fs/cgroup
+        - name: nv-debug
+          hostPath:
+            path: /var/nv_debug
 
 ---
 
