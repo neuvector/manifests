@@ -1,5 +1,6 @@
-  # vi temporary files
-  .*.swp
-  .vscode
-  *.code-workspace
-  *.bak
+# vi temporary files
+.*.swp
+.vscode
+*.code-workspace
+*.bak
+**/stage
