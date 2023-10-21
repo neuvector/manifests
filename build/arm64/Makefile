@@ -10,7 +10,6 @@ stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/usr/lib
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/internal/
-	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
 	cp ../share/.nvcontainer ${STAGE_DIR}/usr/local/bin/
 	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
@@ -19,7 +18,7 @@ stage_fleet_base:
 stage_scan_base: stage_fleet_base
 
 stage_ctrl_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
+	unzip prebuild/binary/consul_1.16.2_linux_arm64.zip -d ${STAGE_DIR}/usr/local/bin/
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
@@ -28,9 +27,8 @@ stage_ctrl_base: stage_fleet_base
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
-	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
+	unzip prebuild/binary/consul_1.16.2_linux_arm64.zip -d ${STAGE_DIR}/usr/local/bin/
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
-	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libhs.so.5.4.9 ${STAGE_DIR}/usr/local/bin/libhs.so.5
 	cp prebuild/binary/libpcap.so.1.9.1 ${STAGE_DIR}/usr/local/bin/libpcap.so.0.8
 	cp prebuild/binary/liburcu.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu.so.2
