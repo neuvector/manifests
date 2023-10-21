@@ -31,16 +31,10 @@ stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
-	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
-	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
-	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libstdc++.so.6.0.19 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
+	cp prebuild/binary/libhs.so.5.4.9 ${STAGE_DIR}/usr/local/bin/libhs.so.5
+	cp prebuild/binary/libpcap.so.1.9.1 ${STAGE_DIR}/usr/local/bin/libpcap.so.0.8
 	cp prebuild/binary/liburcu.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu.so.2
 	cp prebuild/binary/liburcu-cds.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu-cds.so.2
-	cp prebuild/binary/libnfnetlink.so.0.2.0 ${STAGE_DIR}/usr/local/bin/libnfnetlink.so.0.2.0
-	cp prebuild/binary/libnetfilter_queue.so.1.5.0 ${STAGE_DIR}/usr/local/bin/libnetfilter_queue.so.1.5.0
-	cp prebuild/binary/libmnl.so.0.1.0 ${STAGE_DIR}/usr/local/bin/libmnl.so.0.1.0
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
