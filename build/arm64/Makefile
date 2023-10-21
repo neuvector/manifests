@@ -18,7 +18,7 @@ stage_fleet_base:
 stage_scan_base: stage_fleet_base
 
 stage_ctrl_base: stage_fleet_base
-	unzip prebuild/binary/consul_1.16.2_linux_arm64.zip -d ${STAGE_DIR}/usr/local/bin/
+	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
@@ -27,7 +27,7 @@ stage_ctrl_base: stage_fleet_base
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
-	unzip prebuild/binary/consul_1.16.2_linux_arm64.zip -d ${STAGE_DIR}/usr/local/bin/
+	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/libhs.so.5.4.9 ${STAGE_DIR}/usr/local/bin/libhs.so.5
 	cp prebuild/binary/libpcap.so.1.9.1 ${STAGE_DIR}/usr/local/bin/libpcap.so.0.8
