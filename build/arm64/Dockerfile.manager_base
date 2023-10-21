@@ -1,0 +1,29 @@
+FROM registry.suse.com/bci/bci-micro:15.5 AS micro
+FROM registry.suse.com/bci/bci-base:15.5 AS builder
+
+ENV JAVA_VERSION=11.0.21_p9-r0 \
+    JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
+    PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
+    LANG=C.UTF-8 \
+    PYTHONUNBUFFERED=1
+
+COPY --from=micro / /chroot/
+RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
+    python311 java-11-openjdk \
+   	iproute2 lsof procps && \
+    zypper --installroot /chroot clean -a && \
+    rm -rf /chroot/var/log/
+
+
+FROM micro
+WORKDIR /
+COPY --from=builder /chroot/ /
+COPY stage /
+
+RUN ln -s /usr/bin/python3.11 /usr/bin/python && \
+    ln -s /usr/bin/python3.11 /usr/bin/python3  && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib64/python*/ensurepip && \
+    pip3 install --upgrade pip setuptools && \
+    pip3 install --no-cache-dir -r /requirements.txt && \
+    rm -r /root/.cache /requirements.txt
