@@ -3,7 +3,7 @@ STAGE_DIR = stage
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
 	mkdir -p ${STAGE_DIR}/licenses
-	cp EULA.pdf ${STAGE_DIR}/licenses
+	cp ../share/EULA.pdf ${STAGE_DIR}/licenses
 
 stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/usr/local/bin/
