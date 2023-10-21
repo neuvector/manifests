@@ -11,10 +11,10 @@ stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
-	cp .nvcontainer ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
-	cp prebuild/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
-	cp prebuild/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
+	cp ../share/.nvcontainer ${STAGE_DIR}/usr/local/bin/
+	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
+	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
+	cp ../share/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
 
 stage_scan_base: stage_fleet_base
 
@@ -23,8 +23,8 @@ stage_ctrl_base: stage_fleet_base
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
-	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
@@ -44,14 +44,14 @@ stage_enf_base: stage_fleet_base
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp requirements.txt ${STAGE_DIR}/
 
 stage_adpt_base: stage_fleet_base
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 
 updater:
 	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
