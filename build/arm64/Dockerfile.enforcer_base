@@ -1,0 +1,15 @@
+FROM registry.suse.com/bci/bci-micro:latest AS micro
+FROM registry.suse.com/bci/bci-base:latest AS builder
+MAINTAINER support@neuvector.com
+
+COPY --from=micro / /chroot/
+RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
+    gcc libmnl-devel libnetfilter_queue-devel pcre2-devel libjansson-devel && \
+    zypper --installroot /chroot clean -a && \
+    rm -rf /chroot/var/log/
+
+FROM micro
+WORKDIR /
+COPY --from=builder /chroot/ /
+
+COPY stage /
