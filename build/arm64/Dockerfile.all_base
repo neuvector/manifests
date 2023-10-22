@@ -1,0 +1,14 @@
+FROM neuvector/manager_base AS micro
+FROM registry.suse.com/bci/bci-base:15.5 AS builder
+
+COPY --from=micro / /chroot/
+RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
+    libnetfilter_queue-devel pcre2-devel libjansson-devel libmnl-devel \
+    iproute2 ethtool lsof procps grep && \
+    zypper --installroot /chroot clean -a && \
+    rm -rf /chroot/var/log/
+
+FROM micro
+WORKDIR /
+COPY --from=builder /chroot/ /
+COPY stage /
