@@ -28,9 +28,8 @@ stage_ctrl_base: stage_fleet_base
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
+	cp prebuild/binary/libjemalloc.so.2 ${STAGE_DIR}/usr/local/bin/
 	cp prebuild/binary/libhs.so.5.4.9 ${STAGE_DIR}/usr/local/bin/libhs.so.5
-	cp prebuild/binary/liburcu.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu.so.2
-	cp prebuild/binary/liburcu-cds.so.2.0.0 ${STAGE_DIR}/usr/local/bin/liburcu-cds.so.2
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
