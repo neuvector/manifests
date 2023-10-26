@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER gduan@neuvector.com
 
 # Dockerfile to create container to build binaries
@@ -10,13 +10,6 @@ RUN apt-get update && apt-get install -y build-essential autoconf libtool libpca
 RUN apt-get install -y debconf-utils software-properties-common && \
     apt-get install -y libnfnetlink-dev libnetfilter-queue-dev libmnl-dev && \
     apt-get install -y liburcu-dev libjansson-dev libjemalloc-dev libpcre2-dev
-
-# Update gcc & g++ to 9.4.0
-RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    apt-get update && \
-    apt install -y gcc-9 g++-9 && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 30 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 30
 
 # Fleet
 ENV GOPATH /go
