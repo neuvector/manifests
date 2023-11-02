@@ -24,13 +24,13 @@ stage_ctrl_base: stage_fleet_base
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
 	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/libpcre.so.3
+	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	cp prebuild/binary/libjemalloc.so.2 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/libpcre.so.3
+	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
@@ -42,6 +42,9 @@ stage_adpt_base: stage_fleet_base
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+
+stage_all_base:
+	cp requirements.txt ${STAGE_DIR}/
 
 updater:
 	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
@@ -61,7 +64,7 @@ manager_base: stage_init stage_mgr_base
 adapter_base: stage_init stage_adpt_base
 	docker build --no-cache=true -t neuvector/adapter_base -f Dockerfile.adapter_base .
 
-all_base: stage_init stage_enf_base stage_ctrl_base
+all_base: stage_init stage_enf_base stage_ctrl_base stage_all_base
 	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .
 
 
