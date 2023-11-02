@@ -4,5 +4,5 @@ MAINTAINER support@neuvector.com
 COPY stage /
 
 RUN apk --update add ca-certificates && \
-    apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && \
+    apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && apk upgrade && \
     rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk
