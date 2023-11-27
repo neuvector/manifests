@@ -177,15 +177,15 @@ spec:
             - mountPath: /var/neuvector
               name: nv-share
               readOnly: false
-            - mountPath: /var/run/crio/crio.sock
-              name: runtime-sock
-              readOnly: true
-            - mountPath: /host/proc
-              name: proc-vol
-              readOnly: true
-            - mountPath: /host/cgroup
-              name: cgroup-vol
-              readOnly: true
+            # - mountPath: /var/run/crio/crio.sock
+            #   name: runtime-sock
+            #   readOnly: true
+            # - mountPath: /host/proc
+            #   name: proc-vol
+            #   readOnly: true
+            # - mountPath: /host/cgroup
+            #   name: cgroup-vol
+            #   readOnly: true
             - mountPath: /var/nv_debug
               name: nv-debug
               readOnly: false
@@ -198,15 +198,15 @@ spec:
         - name: nv-share
           hostPath:
             path: /var/neuvector
-        - name: runtime-sock
-          hostPath:
-            path: /var/run/crio/crio.sock
-        - name: proc-vol
-          hostPath:
-            path: /proc
-        - name: cgroup-vol
-          hostPath:
-            path: /sys/fs/cgroup
+        # - name: runtime-sock
+        #   hostPath:
+        #     path: /var/run/crio/crio.sock
+        # - name: proc-vol
+        #   hostPath:
+        #     path: /proc
+        # - name: cgroup-vol
+        #   hostPath:
+        #     path: /sys/fs/cgroup
         - name: nv-debug
           hostPath:
             path: /var/nv_debug
@@ -266,15 +266,15 @@ spec:
             - mountPath: /lib/modules
               name: modules-vol
               readOnly: true
-            - mountPath: /var/run/crio/crio.sock
-              name: runtime-sock
-              readOnly: true
-            - mountPath: /host/proc
-              name: proc-vol
-              readOnly: true
-            - mountPath: /host/cgroup
-              name: cgroup-vol
-              readOnly: true
+            # - mountPath: /var/run/crio/crio.sock
+            #   name: runtime-sock
+            #   readOnly: true
+            # - mountPath: /host/proc
+            #   name: proc-vol
+            #   readOnly: true
+            # - mountPath: /host/cgroup
+            #   name: cgroup-vol
+            #   readOnly: true
             - mountPath: /var/nv_debug
               name: nv-debug
               readOnly: false
@@ -284,15 +284,15 @@ spec:
         - name: modules-vol
           hostPath:
             path: /lib/modules
-        - name: runtime-sock
-          hostPath:
-            path: /var/run/crio/crio.sock
-        - name: proc-vol
-          hostPath:
-            path: /proc
-        - name: cgroup-vol
-          hostPath:
-            path: /sys/fs/cgroup
+        # - name: runtime-sock
+        #   hostPath:
+        #     path: /var/run/crio/crio.sock
+        # - name: proc-vol
+        #   hostPath:
+        #     path: /proc
+        # - name: cgroup-vol
+        #   hostPath:
+        #     path: /sys/fs/cgroup
         - name: nv-debug
           hostPath:
             path: /var/nv_debug
