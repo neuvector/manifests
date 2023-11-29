@@ -286,9 +286,11 @@ data:
         url: http...
         type: Slack
         enable: true
+        use_proxy: false
       - name: mywebhook
         url: http...
         enable: true
+        use_proxy: false
     # Optional. empty string
     Cluster_Name: cluster.local
     # Optional. chose multiple between cpath/mutex/conn/scan/cluster or empty string
