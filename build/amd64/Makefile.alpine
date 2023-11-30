@@ -12,10 +12,10 @@ base:
 	$(MAKE)	updater
 
 push:
-	docker push neuvector/controller_base:latest
-	docker push neuvector/enforcer_base:latest
-	docker push neuvector/manager_base:latest
-	docker push neuvector/all_base:latest
-	docker push neuvector/scanner_base:latest
-	docker push neuvector/adapter_base:latest
-	docker push neuvector/updater:latest
+	docker push neuvector/controller_base:amd64.latest
+	docker push neuvector/enforcer_base:amd64.latest
+	docker push neuvector/manager_base:amd64.latest
+	docker push neuvector/all_base:amd64.latest
+	docker push neuvector/scanner_base:amd64.latest
+	docker push neuvector/adapter_base:amd64.latest
+	docker push neuvector/updater:amd64.latest
