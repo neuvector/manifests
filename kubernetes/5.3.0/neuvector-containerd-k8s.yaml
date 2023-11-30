@@ -136,8 +136,6 @@ spec:
       containers:
         - name: neuvector-controller-pod
           image: neuvector/controller:5.3.0
-          securityContext:
-            privileged: true
           readinessProbe:
             exec:
               command:
