@@ -153,8 +153,6 @@ spec:
       containers:
         - name: neuvector-controller-pod
           image: docker-registry.default.svc:5000/neuvector/controller:<version>
-          securityContext:
-            privileged: true
           readinessProbe:
             exec:
               command:
