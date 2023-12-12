@@ -200,6 +200,9 @@ spec:
               - secret:
                   name: neuvector-init
                   optional: true
+              - secret:
+                  name: neuvector-secret
+                  optional: true
 
 ---
 
