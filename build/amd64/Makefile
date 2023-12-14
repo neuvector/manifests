@@ -30,6 +30,8 @@ stage_ctrl_base: stage_fleet_base
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/yq.4.45.0.gz > ${STAGE_DIR}/usr/local/bin/yq
+	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
 	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1

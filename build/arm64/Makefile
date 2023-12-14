@@ -29,6 +29,8 @@ stage_ctrl_base: stage_fleet_base
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/yq.4.45.0.gz > ${STAGE_DIR}/usr/local/bin/yq
+	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	cp prebuild/binary/libjemalloc.so.2 ${STAGE_DIR}/usr/local/bin/
 	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/lib64/
 
