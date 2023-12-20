@@ -153,6 +153,8 @@ spec:
       containers:
         - name: neuvector-controller-pod
           image: image-registry.openshift-image-registry.svc:5000/neuvector/controller:<version>
+          securityContext:
+            runAsUser: 0
           readinessProbe:
             exec:
               command:
@@ -184,9 +186,6 @@ spec:
             # - mountPath: /host/cgroup
             #   name: cgroup-vol
             #   readOnly: true
-            - mountPath: /var/nv_debug
-              name: nv-debug
-              readOnly: false
             - mountPath: /etc/config
               name: config-volume
               readOnly: true
@@ -205,9 +204,6 @@ spec:
         # - name: cgroup-vol
         #   hostPath:
         #     path: /sys/fs/cgroup
-        - name: nv-debug
-          hostPath:
-            path: /var/nv_debug
         - name: config-volume
           projected:
             sources:
