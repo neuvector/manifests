@@ -156,10 +156,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+            # - name: CTRL_PERSIST_CONFIG
+            #   value: "1"
           volumeMounts:
-            - mountPath: /var/neuvector
-              name: nv-share
-              readOnly: false
+            # - mountPath: /var/neuvector
+            #   name: nv-share
+            #   readOnly: false
             # - mountPath: /run/containerd/containerd.sock
             #   name: runtime-sock
             #   readOnly: true
@@ -175,9 +177,9 @@ spec:
       terminationGracePeriodSeconds: 300
       restartPolicy: Always
       volumes:
-        - name: nv-share
-          hostPath:
-            path: /var/neuvector
+        # - name: nv-share
+        #   persistentVolumeClaim:
+        #     claimName: neuvector-data
         # - name: runtime-sock
         #   hostPath:
         #     path: /run/containerd/containerd.sock
