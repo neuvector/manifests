@@ -303,8 +303,8 @@ spec:
       labels:
         app: neuvector-scanner-pod
     spec:
-      serviceAccountName: basic
-      serviceAccount: basic
+      serviceAccountName: scanner
+      serviceAccount: scanner
       containers:
         - name: neuvector-scanner-pod
           image: neuvector/scanner:latest

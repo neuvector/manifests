@@ -320,8 +320,8 @@ spec:
       labels:
         app: neuvector-scanner-pod
     spec:
-      serviceAccountName: basic
-      serviceAccount: basic
+      serviceAccountName: scanner
+      serviceAccount: scanner
       containers:
         - name: neuvector-scanner-pod
           image: image-registry.openshift-image-registry.svc:5000/neuvector/scanner:<version>
