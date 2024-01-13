@@ -162,15 +162,6 @@ spec:
             # - mountPath: /var/neuvector
             #   name: nv-share
             #   readOnly: false
-            # - mountPath: /var/run/docker.sock
-            #   name: runtime-sock
-            #   readOnly: true
-            # - mountPath: /host/proc
-            #   name: proc-vol
-            #   readOnly: true
-            # - mountPath: /host/cgroup
-            #   name: cgroup-vol
-            #   readOnly: true
             - mountPath: /etc/config
               name: config-volume
               readOnly: true
@@ -180,15 +171,6 @@ spec:
         # - name: nv-share
         #   persistentVolumeClaim:
         #     claimName: neuvector-data
-        # - name: runtime-sock
-        #   hostPath:
-        #     path: /var/run/docker.sock
-        # - name: proc-vol
-        #   hostPath:
-        #     path: /proc
-        # - name: cgroup-vol
-        #   hostPath:
-        #     path: /sys/fs/cgroup
         - name: config-volume
           projected:
             sources:
@@ -248,7 +230,7 @@ spec:
             - mountPath: /lib/modules
               name: modules-vol
               readOnly: true
-            # - mountPath: /var/run/docker.sock
+            # - mountPath: /run/runtime.sock
             #   name: runtime-sock
             #   readOnly: true
             # - mountPath: /host/proc
