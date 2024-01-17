@@ -1,0 +1,28 @@
+include Makefile
+
+all: base push
+
+base:
+	$(MAKE)	controller_base
+	$(MAKE)	enforcer_base
+	$(MAKE)	manager_base
+	$(MAKE)	all_base
+	$(MAKE)	scanner_base
+	$(MAKE)	adapter_base
+	$(MAKE)	updater
+
+push:
+	docker tag neuvector/controller_base:latest neuvector/controller_base:arm64.latest
+	docker push neuvector/controller_base:arm64.latest
+	docker tag neuvector/enforcer_base:latest neuvector/enforcer_base:arm64.latest
+	docker push neuvector/enforcer_base:arm64.latest
+	docker tag neuvector/manager_base:latest neuvector/manager_base:arm64.latest
+	docker push neuvector/manager_base:arm64.latest
+	docker tag neuvector/all_base:latest neuvector/all_base:arm64.latest
+	docker push neuvector/all_base:arm64.latest
+	docker tag neuvector/scanner_base:latest neuvector/scanner_base:arm64.latest
+	docker push neuvector/scanner_base:arm64.latest
+	docker tag neuvector/adapter_base:latest neuvector/adapter_base:arm64.latest
+	docker push neuvector/adapter_base:arm64.latest
+	docker tag neuvector/updater:latest neuvector/updater:arm64.latest
+	docker push neuvector/updater:arm64.latest

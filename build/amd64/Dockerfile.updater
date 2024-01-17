@@ -1,0 +1,11 @@
+FROM alpine:3.19.0
+MAINTAINER support@neuvector.com
+
+LABEL neuvector.image="neuvector/updater" \
+      neuvector.role="updater"
+
+RUN apk --update add ca-certificates curl && \
+    apk update && apk upgrade && \
+    rm -rf /tmp/* && rm -rf /var/cache/apk/*
+
+ENTRYPOINT ["sleep", "30"]

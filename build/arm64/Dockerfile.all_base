@@ -1,0 +1,17 @@
+FROM neuvector/manager_base AS micro
+FROM registry.suse.com/bci/bci-base:15.5 AS builder
+
+COPY --from=micro / /chroot/
+RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
+    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel \
+    iproute2 ethtool lsof procps grep && \
+    zypper --installroot /chroot clean -a && \
+    rm -rf /chroot/var/log/
+
+FROM micro
+WORKDIR /
+COPY --from=builder /chroot/ /
+COPY stage /
+
+RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
+    ln -s /usr/lib64/libpcre.so.3.13.3 /usr/lib64/libpcre.so.3

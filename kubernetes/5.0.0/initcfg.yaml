@@ -41,9 +41,6 @@ data:
           write: true
         - id: ci_scan
           write: true
-        - id: cloud
-          read: true
-          write: true
         - id: rt_policy
           read: true
           write: true
@@ -65,10 +62,6 @@ data:
         - id: authorization
           read: true
           write: true
-  eulainitcfg.yaml: |
-    # Optional. true or false or empty string(false)
-    always_reload: false
-    license_key : 0Bca63Iy2FiXGqjk...
   ldapinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
@@ -251,6 +244,8 @@ data:
     always_reload: false
     # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
     New_Service_Policy_Mode: Discover
+    # Optional. zero-drift or basic or empty string(zero-drift)
+    New_Service_Profile_Baseline: basic
     # Optional. input valid ipv4 address or empty string
     Syslog_ip: 1.2.3.4
     # Optional. input 17 or 6 here for upd or tcp or empty string(17)
@@ -305,6 +300,18 @@ data:
     Xff_Enabled: true
     Net_Service_Status: false
     Net_Service_Policy_Mode: Discover
+    Scanner_Autoscale:
+    # Optional. Choose between immediate or delayed or empty string
+      Strategy: 
+      Min_Pods: 1
+      Max_Pods: 3
+    # Optional. true or false or empty string(false)
+    No_Telemetry_Report: false
+    Scan_Config:
+      # Optional. true or false or empty string(false)
+      Auto_Scan: false
+    # Optional. default value is 24. unit is hour and range is between 0 and 168
+    Unused_Group_Aging: 24
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false

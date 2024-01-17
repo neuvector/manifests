@@ -1,6 +1,0 @@
-click==8.1.2
-cmd2==2.3.3
-prettytable==2.5.0
-requests==2.27.1
-six==1.11.0
-urllib3==1.26.8
