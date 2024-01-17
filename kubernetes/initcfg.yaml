@@ -303,8 +303,6 @@ data:
       Username: username
       Password: password
     Xff_Enabled: true
-    Net_Service_Status: false
-    Net_Service_Policy_Mode: Discover
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false

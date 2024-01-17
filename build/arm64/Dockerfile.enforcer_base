@@ -4,7 +4,7 @@ FROM registry.suse.com/bci/bci-base:15.5 AS builder
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel \
-    iproute2 lsof procps grep tcpdump curl sed jq find && \
+    iproute2 lsof procps grep tcpdump curl sed jq find iptables && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
