@@ -250,7 +250,11 @@ spec:
             path: /lib/modules
         # - name: runtime-sock
         #   hostPath:
+        #     path: /var/run/docker.sock
+        #     path: /var/run/containerd/containerd.sock
         #     path: /run/dockershim.sock
+        #     path: /run/k3s/containerd/containerd.sock
+        #     path: /var/run/crio/crio.sock
         # - name: proc-vol
         #   hostPath:
         #     path: /proc
