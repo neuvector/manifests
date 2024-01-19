@@ -3,7 +3,7 @@ MAINTAINER support@neuvector.com
 
 COPY stage /
 
-RUN apk --update add ca-certificates iproute2 ethtool lsof procps curl jq && \
+RUN apk --update add ca-certificates iproute2 ethtool lsof procps curl jq iptables && \
     apk add --allow-untrusted --force-overwrite /glibc-2.33-r0.apk && apk update && apk upgrade && \
     rm -rf /tmp/* && rm -rf /var/cache/apk/* /glibc-2.33-r0.apk && \
     ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/glibc-compat/lib/libpcre.so.3 && \
