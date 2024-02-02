@@ -255,6 +255,7 @@ spec:
         #     path: /run/dockershim.sock
         #     path: /run/k3s/containerd/containerd.sock
         #     path: /var/run/crio/crio.sock
+        #     path: /var/vcap/sys/run/docker/docker.sock
         # - name: proc-vol
         #   hostPath:
         #     path: /proc
