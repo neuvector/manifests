@@ -95,7 +95,7 @@ spec:
       serviceAccount: controller
       containers:
         - name: neuvector-allinone-pod
-          image: neuvector/allinone:5.3.0
+          image: neuvector/allinone:5.3.1
           securityContext:
             privileged: true
           readinessProbe:
@@ -217,7 +217,7 @@ spec:
       serviceAccount: enforcer
       containers:
         - name: neuvector-enforcer-pod
-          image: neuvector/enforcer:5.3.0
+          image: neuvector/enforcer:5.3.1
           securityContext:
             privileged: true
           env:
