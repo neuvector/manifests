@@ -30,7 +30,7 @@ stage_ctrl_base: stage_fleet_base
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
-	gzip -cd prebuild/binary/yq.4.40.5.gz > ${STAGE_DIR}/usr/local/bin/yq
+	gzip -cd prebuild/binary/yq.4.43.1.gz > ${STAGE_DIR}/usr/local/bin/yq
 	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	tar -xvf prebuild/binary/iptables-1.8.9.tar.xz -C ${STAGE_DIR}/
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
