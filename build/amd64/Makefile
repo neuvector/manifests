@@ -30,6 +30,9 @@ stage_ctrl_base: stage_fleet_base
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul.1.11.11.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/yq.4.43.1.gz > ${STAGE_DIR}/usr/local/bin/yq
+	chmod +x ${STAGE_DIR}/usr/local/bin/yq
+	tar -xvf prebuild/binary/iptables-1.8.9.tar.xz -C ${STAGE_DIR}/
 	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
 	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
@@ -81,3 +84,4 @@ build_manager:
 build_fleet:
 	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
 	docker build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .
+	docker build --no-cache=true -t neuvector/build_fleet:v2 -f Dockerfile.build_fleet_v2 .

@@ -7,7 +7,7 @@ stage_init:
 
 stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/usr/local/bin/
-	mkdir -p ${STAGE_DIR}/usr/lib
+	mkdir -p ${STAGE_DIR}/usr/lib64
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/.nvcontainer ${STAGE_DIR}/usr/local/bin/
@@ -24,13 +24,15 @@ stage_ctrl_base: stage_fleet_base
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
 	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
-	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/libpcre.so.3
+	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/lib64/
 
 stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/consul_1.11.11_linux_arm64.gz > ${STAGE_DIR}/usr/local/bin/consul
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
+	gzip -cd prebuild/binary/yq.4.43.1.gz > ${STAGE_DIR}/usr/local/bin/yq
+	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	cp prebuild/binary/libjemalloc.so.2 ${STAGE_DIR}/usr/local/bin/
-	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/local/bin/libpcre.so.3
+	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/lib64/
 
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
@@ -71,3 +73,4 @@ build_manager:
 build_fleet:
 	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
 	docker build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .
+	docker build --no-cache=true -t neuvector/build_fleet:v2 -f Dockerfile.build_fleet_v2 .

@@ -1,20 +1,20 @@
-FROM alpine:3.18.4
+FROM alpine:3.19.1
 MAINTAINER support@neuvector.com
 
 COPY stage /
 
-ENV JAVA_VERSION=11.0.21_p9-r0 \
-    JAVA_ALPINE_VERSION=11.0.21_p9-r0 \
+ENV JAVA_VERSION=11.0.22_p7-r0 \
+    JAVA_ALPINE_VERSION=11.0.22_p7-r0 \
     JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
     PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
     LANG=C.UTF-8 \
 	PYTHONUNBUFFERED=1
 
 RUN apk add --no-cache python3 && ln -sf python3 /usr/bin/python && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    pip3 install --no-cache-dir -r /requirements.txt && \
-    rm -r /root/.cache
-RUN set -x && apk add --update ca-certificates iproute2 lsof procps openjdk11-jre="$JAVA_ALPINE_VERSION" && apk update && \
+	python3 -m venv .venv && \
+	source .venv/bin/activate && \
+	pip3 install --upgrade pip setuptools && \
+	pip3 install --no-cache-dir -r /requirements.txt && \
+	rm -r /root/.cache
+RUN set -x && apk add --update ca-certificates iproute2 lsof procps openjdk11-jre="$JAVA_ALPINE_VERSION" && apk update && apk upgrade && \
     rm -rf /tmp/* /var/cache/apk/* /requirements.txt

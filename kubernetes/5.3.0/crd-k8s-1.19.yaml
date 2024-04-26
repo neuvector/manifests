@@ -1,0 +1,505 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: nvsecurityrules.neuvector.com
+spec:
+  group: neuvector.com
+  names:
+    kind: NvSecurityRule
+    listKind: NvSecurityRuleList
+    plural: nvsecurityrules
+    singular: nvsecurityrule
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              egress:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    applications:
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      type: string
+                    ports:
+                      type: string
+                    priority:
+                      type: integer
+                    selector:
+                      properties:
+                        comment:
+                          type: string
+                        criteria:
+                          items:
+                            properties:
+                              key:
+                                type: string
+                              op:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - key
+                            - op
+                            - value
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        original_name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - action
+                  - name
+                  - selector
+                  type: object
+                type: array
+              file:
+                items:
+                  properties:
+                    app:
+                      items:
+                        type: string
+                      type: array
+                    behavior:
+                      enum:
+                      - monitor_change
+                      - block_access
+                      type: string
+                    filter:
+                      type: string
+                    recursive:
+                      type: boolean
+                  required:
+                  - behavior
+                  - filter
+                  type: object
+                type: array
+              ingress:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    applications:
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      type: string
+                    ports:
+                      type: string
+                    priority:
+                      type: integer
+                    selector:
+                      properties:
+                        comment:
+                          type: string
+                        criteria:
+                          items:
+                            properties:
+                              key:
+                                type: string
+                              op:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - key
+                            - op
+                            - value
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        original_name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - action
+                  - name
+                  - selector
+                  type: object
+                type: array
+              process:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    allow_update:
+                      type: boolean
+                    name:
+                      type: string
+                    path:
+                      type: string
+                  required:
+                  - action
+                  type: object
+                type: array
+              process_profile:
+                properties:
+                  baseline:
+                    enum:
+                    - default
+                    - shield
+                    - basic
+                    - zero-drift
+                    type: string
+                type: object
+              target:
+                properties:
+                  policymode:
+                    enum:
+                    - Discover
+                    - Monitor
+                    - Protect
+                    - N/A
+                    type: string
+                  selector:
+                    properties:
+                      comment:
+                        type: string
+                      criteria:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            op:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - key
+                          - op
+                          - value
+                          type: object
+                        type: array
+                      name:
+                        type: string
+                      original_name:
+                        type: string
+                    required:
+                    - name
+                    type: object
+                required:
+                - selector
+                type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
+                type: object
+              waf:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
+                type: object
+            required:
+            - target
+            type: object
+        type: object
+    served: true
+    storage: true
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: nvclustersecurityrules.neuvector.com
+spec:
+  group: neuvector.com
+  names:
+    kind: NvClusterSecurityRule
+    listKind: NvClusterSecurityRuleList
+    plural: nvclustersecurityrules
+    singular: nvclustersecurityrule
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              egress:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    applications:
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      type: string
+                    ports:
+                      type: string
+                    priority:
+                      type: integer
+                    selector:
+                      properties:
+                        comment:
+                          type: string
+                        criteria:
+                          items:
+                            properties:
+                              key:
+                                type: string
+                              op:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - key
+                            - op
+                            - value
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        original_name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - action
+                  - name
+                  - selector
+                  type: object
+                type: array
+              file:
+                items:
+                  properties:
+                    app:
+                      items:
+                        type: string
+                      type: array
+                    behavior:
+                      enum:
+                      - monitor_change
+                      - block_access
+                      type: string
+                    filter:
+                      type: string
+                    recursive:
+                      type: boolean
+                  required:
+                  - behavior
+                  - filter
+                  type: object
+                type: array
+              ingress:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    applications:
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      type: string
+                    ports:
+                      type: string
+                    priority:
+                      type: integer
+                    selector:
+                      properties:
+                        comment:
+                          type: string
+                        criteria:
+                          items:
+                            properties:
+                              key:
+                                type: string
+                              op:
+                                type: string
+                              value:
+                                type: string
+                            required:
+                            - key
+                            - op
+                            - value
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        original_name:
+                          type: string
+                      required:
+                      - name
+                      type: object
+                  required:
+                  - action
+                  - name
+                  - selector
+                  type: object
+                type: array
+              process:
+                items:
+                  properties:
+                    action:
+                      enum:
+                      - allow
+                      - deny
+                      type: string
+                    allow_update:
+                      type: boolean
+                    name:
+                      type: string
+                    path:
+                      type: string
+                  required:
+                  - action
+                  type: object
+                type: array
+              process_profile:
+                properties:
+                  baseline:
+                    enum:
+                    - default
+                    - shield
+                    - basic
+                    - zero-drift
+                    type: string
+                type: object
+              target:
+                properties:
+                  policymode:
+                    enum:
+                    - Discover
+                    - Monitor
+                    - Protect
+                    - N/A
+                    type: string
+                  selector:
+                    properties:
+                      comment:
+                        type: string
+                      criteria:
+                        items:
+                          properties:
+                            key:
+                              type: string
+                            op:
+                              type: string
+                            value:
+                              type: string
+                          required:
+                          - key
+                          - op
+                          - value
+                          type: object
+                        type: array
+                      name:
+                        type: string
+                      original_name:
+                        type: string
+                    required:
+                    - name
+                    type: object
+                required:
+                - selector
+                type: object
+              dlp:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
+                type: object
+              waf:
+                properties:
+                  settings:
+                    items:
+                      properties:
+                        action:
+                          enum:
+                          - allow
+                          - deny
+                          type: string
+                        name:
+                          type: string
+                      required:
+                      - name
+                      - action
+                      type: object
+                    type: array
+                  status:
+                    type: boolean
+                type: object
+            required:
+            - target
+            type: object
+        type: object
+    served: true
+    storage: true

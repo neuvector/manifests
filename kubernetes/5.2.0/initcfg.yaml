@@ -312,6 +312,7 @@ data:
     Xff_Enabled: true
     Net_Service_Status: false
     Net_Service_Policy_Mode: Discover
+    Disable_Net_Policy: false
     Scanner_Autoscale:
     # Optional. Choose between immediate or delayed or empty string
       Strategy: 

@@ -286,9 +286,11 @@ data:
         url: http...
         type: Slack
         enable: true
+        use_proxy: false
       - name: mywebhook
         url: http...
         enable: true
+        use_proxy: false
     # Optional. empty string
     Cluster_Name: cluster.local
     # Optional. chose multiple between cpath/mutex/conn/scan/cluster or empty string
@@ -312,6 +314,7 @@ data:
     Xff_Enabled: true
     Net_Service_Status: false
     Net_Service_Policy_Mode: Discover
+    Disable_Net_Policy: false
     Scanner_Autoscale:
     # Optional. Choose between immediate or delayed or empty string
       Strategy: 
