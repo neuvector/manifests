@@ -307,14 +307,6 @@ data:
       Max_Pods: 3
     # Optional. true or false or empty string(false)
     No_Telemetry_Report: false
-    # Optional. Mode Automation Discovery to Monitor. true or false or empty string(false)
-    Mode_Auto_D2M: false
-    # Optional. default value is 0. unit is seconds and range is between 3600 and 2592000 (1 hour to 30 days)
-    Mode_Auto_D2M_Duration: 0
-    # Optional. Mode Automation Monitor to Protect. true or false or empty string(false)
-    Mode_Auto_M2P: false
-    # Optional. default value is 0. unit is seconds and range is between 3600 and 2592000 (1 hour to 30 days)
-    Mode_Auto_M2P_Duration: 0
     Scan_Config:
       # Optional. true or false or empty string(false)
       Auto_Scan: false
