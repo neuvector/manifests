@@ -1,0 +1,65 @@
+# each CR of nvpermissiondef represents an NV permission that can be used in SSO permissions mapping
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: nvpermissiondefs.neuvector.com
+spec:
+  group: neuvector.com
+  names:
+    kind: NvPermissionDef
+    listKind: NvPermissionDefList
+    plural: nvpermissiondefs
+    singular: nvpermissiondef
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              apiGroup:
+                enum:
+                - read-only.neuvector.api.io
+                - api.neuvector.com
+                type: string
+              scopes:
+                type: object
+                properties:
+                  cluster:
+                    type: boolean
+                  domain:
+                    type: boolean
+              operations:
+                type: object
+                properties:
+                  view:
+                    type: object
+                    properties:
+                      verbs:
+                        type: array
+                        items:
+                          enum:
+                          - get
+                          type: string
+                    required:
+                    - verbs
+                  modify:
+                    type: object
+                    properties:
+                      verbs:
+                        type: array
+                        items:
+                          enum:
+                          - '*'
+                          type: string
+                    required:
+                    - verbs
+            required:
+            - apiGroup
+            - scopes
+            - operations

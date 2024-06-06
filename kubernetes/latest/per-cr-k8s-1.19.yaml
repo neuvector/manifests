@@ -1,0 +1,258 @@
+# each CR represents an NV permission that can be used in SSO permissions mapping
+apiVersion: neuvector.com/v1
+kind: NvPermissionDefList
+items:
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.all-permissions
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "All eligible permissions except for nv-perm.fed on cluster or namespace scope"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.reg-scan
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Configure registry image scan and view scan results"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.ci-scan
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Trigger build-phase vulnerability scan"
+    scopes:
+      cluster: true
+    operations:
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.admctrl
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Manage admission control configurations"
+    scopes:
+      cluster: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.audit-events
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Access risk and compliance event logs"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.events
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Access system activity event logs"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.authentication
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Manage authentication server configuration and role mappings"
+    scopes:
+      cluster: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.authorization
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Manage users, custom roles and API keys"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.config
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Manage system configurations"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.vulnerability
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Review and configure vulnerability management profile"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.rt-scan
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Trigger and view vulnerability scan of running workloads"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.rt-policy
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Manage Policy menus for Policy Mode (Discover, Monitor, Protect), Network Rules, Process Rules, File Access Rules, DLP, WAF, Packet capture, Response Rules"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.compliance
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Review Compliance check results, manage compliance profile and configure custom compliance scripts"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.security-events
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Access security event logs"
+    scopes:
+      cluster: true
+      domain: true
+    operations:
+      view:
+        verbs:
+        - get
+- apiVersion: neuvector.com/v1
+  kind: NvPermissionDef
+  metadata:
+    name: nv-perm.fed
+    namespace: neuvector
+  spec:
+    apiGroup: api.neuvector.com
+    comment: "Access managed clusters in federation"
+    scopes:
+      cluster: true
+    operations:
+      view:
+        verbs:
+        - get
+      modify:
+        verbs:
+        - '*'
