@@ -27,6 +27,8 @@ spec:
                 - read-only.neuvector.api.io
                 - api.neuvector.com
                 type: string
+              comment:
+                type: string
               scopes:
                 type: object
                 properties:
