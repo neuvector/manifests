@@ -34,7 +34,7 @@ spec:
       serviceAccountName: registry-adapter
       containers:
         - name: neuvector-registry-adapter-pod
-          image: neuvector/registry-adapter:0.1.1-s2
+          image: neuvector/registry-adapter:0.1.2
           imagePullPolicy: Always
           env:
             - name: CLUSTER_JOIN_ADDR
