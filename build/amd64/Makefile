@@ -23,8 +23,6 @@ stage_ctrl_base: stage_fleet_base
 	chmod +x ${STAGE_DIR}/usr/local/bin/consul
 	gzip -cd prebuild/binary/opa.0.48.0.gz > ${STAGE_DIR}/usr/local/bin/opa
 	chmod +x ${STAGE_DIR}/usr/local/bin/opa
-	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
-	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp prebuild/binary/libpcre.so.3.13.1 ${STAGE_DIR}/usr/local/bin/
 
 stage_enf_base: stage_fleet_base
