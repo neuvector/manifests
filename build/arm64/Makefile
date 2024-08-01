@@ -35,6 +35,9 @@ stage_enf_base: stage_fleet_base
 	cp prebuild/binary/libpcre.so.3.13.3 ${STAGE_DIR}/usr/lib64/
 
 stage_mgr_base:
+	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 	cp requirements.txt ${STAGE_DIR}/
 
 stage_adpt_base: stage_fleet_base
