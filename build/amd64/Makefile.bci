@@ -3,13 +3,13 @@ include Makefile
 all: base push
 
 base:
-	$(MAKE)	controller_base BASEOS=alpine
-	$(MAKE)	enforcer_base BASEOS=alpine
-	$(MAKE)	manager_base BASEOS=alpine
-	$(MAKE)	all_base BASEOS=alpine
-	$(MAKE)	scanner_base BASEOS=alpine
-	$(MAKE)	adapter_base BASEOS=alpine
-	$(MAKE)	updater BASEOS=alpine
+	$(MAKE)	controller_base BASEOS=bci
+	$(MAKE)	enforcer_base BASEOS=bci
+	$(MAKE)	manager_base BASEOS=bci
+	$(MAKE)	all_base BASEOS=bci
+	$(MAKE)	scanner_base BASEOS=bci
+	$(MAKE)	adapter_base BASEOS=bci
+	$(MAKE)	updater BASEOS=bci
 
 push:
 	docker tag neuvector/controller_base:latest neuvector/controller_base:amd64.latest
