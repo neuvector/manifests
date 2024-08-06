@@ -1,4 +1,5 @@
 STAGE_DIR = stage
+BASEOS?=alpine
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
@@ -57,25 +58,26 @@ stage_adpt_base: stage_fleet_base
 	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 
 updater:
-	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
+	docker build --no-cache=true -t neuvector/updater:latest -f ${BASEOS}/Dockerfile.updater .
 
 scanner_base: stage_init stage_scan_base
-	docker build --no-cache=true -t neuvector/scanner_base -f Dockerfile.scanner_base .
+	docker build --no-cache=true -t neuvector/scanner_base -f ${BASEOS}/Dockerfile.scanner_base .
 
 controller_base: stage_init stage_ctrl_base
-	docker build --no-cache=true -t neuvector/controller_base -f Dockerfile.controller_base .
+	docker build --no-cache=true -t neuvector/controller_base -f ${BASEOS}/Dockerfile.controller_base .
 
 enforcer_base: stage_init stage_enf_base
-	docker build --no-cache=true -t neuvector/enforcer_base -f Dockerfile.enforcer_base .
+	docker build --no-cache=true -t neuvector/enforcer_base -f ${BASEOS}/Dockerfile.enforcer_base .
 
 manager_base: stage_init stage_mgr_base
-	docker build --no-cache=true -t neuvector/manager_base -f Dockerfile.manager_base .
+	docker build --no-cache=true -t neuvector/manager_base -f ${BASEOS}/Dockerfile.manager_base .
 
 adapter_base: stage_init stage_adpt_base
-	docker build --no-cache=true -t neuvector/adapter_base -f Dockerfile.adapter_base .
+	docker build --no-cache=true -t neuvector/adapter_base -f ${BASEOS}/Dockerfile.adapter_base .
 
 all_base: stage_init stage_enf_base stage_ctrl_base
-	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .
+	cp requirements.txt ${STAGE_DIR}/
+	docker build --no-cache=true -t neuvector/all_base -f ${BASEOS}/Dockerfile.all_base .
 
 
 build_manager:
