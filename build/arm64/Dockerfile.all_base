@@ -1,5 +1,5 @@
 FROM neuvector/manager_base AS micro
-FROM registry.suse.com/bci/bci-base:15.5 AS builder
+FROM registry.suse.com/bci/bci-base:15.6 AS builder
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
