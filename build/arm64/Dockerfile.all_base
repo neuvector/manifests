@@ -1,17 +1,31 @@
-FROM neuvector/manager_base AS micro
-FROM registry.suse.com/bci/bci-base:15.5 AS builder
+FROM registry.suse.com/bci/bci-micro:15.6 AS micro
+FROM registry.suse.com/bci/bci-base:15.6 AS builder
+
+ENV JAVA_VERSION=11.0.24_p8-r0 \
+    JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
+    PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
+    LANG=C.UTF-8 \
+    PYTHONUNBUFFERED=1
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel \
-    iproute2 ethtool lsof procps grep && \
+    python312 python312-pip java-11-openjdk \
+    iproute2 lsof procps grep ethtool awk \
+    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
 FROM micro
 WORKDIR /
 COPY --from=builder /chroot/ /
+COPY --from=builder /usr/sbin/useradd /usr/sbin
 COPY stage /
 
+RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
+    ln -s /usr/bin/python3.12 /usr/bin/python3  && \
+    pip3 install --upgrade setuptools && \
+    pip3 install --no-cache-dir -r /requirements.txt && \
+    rm -r /root/.cache /requirements.txt
+RUN cd /usr/bin/ && rm -rf basename chcon chgrp chmod chown chroot cksum dd df dircolors dirname du install install-info join locale localedef mkdir mkfifo mknod mktemp paste pathchk readlink realpath sync smidiff smidump smilink smiquery smistrip smixlate tee tiemout tload top truncate unlink watch
 RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
     ln -s /usr/lib64/libpcre.so.3.13.3 /usr/lib64/libpcre.so.3

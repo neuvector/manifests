@@ -63,7 +63,7 @@ manager_base: stage_init stage_mgr_base
 adapter_base: stage_init stage_adpt_base
 	docker build --no-cache=true -t neuvector/adapter_base -f Dockerfile.adapter_base .
 
-all_base: stage_init stage_enf_base stage_ctrl_base
+all_base: stage_init stage_enf_base stage_ctrl_base stage_mgr_base
 	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .
 
 
