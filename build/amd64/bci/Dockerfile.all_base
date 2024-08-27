@@ -25,6 +25,7 @@ RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/bin/python3.12 /usr/bin/python3  && \
     pip3 install --upgrade setuptools && \
     pip3 install --no-cache-dir "supervisor==4.2.5" && \
+    ln -s /usr/local/bin/supervisord /usr/bin/supervisord && \
     pip3 install --no-cache-dir -r /requirements.txt
 
 RUN cd /usr/bin/ && rm -rf basename chcon chgrp chmod chown chroot cksum dd df dircolors dirname install install-info join locale localedef mkdir mkfifo mknod mktemp paste pathchk readlink realpath sync smidiff smidump smilink smiquery smistrip smixlate tee tiemout tload top truncate unlink watch
