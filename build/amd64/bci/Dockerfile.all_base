@@ -12,6 +12,9 @@ COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     java-11-openjdk python312 python312-pip \
     ca-certificates ethtool lsof procps curl jq iptables awk && \
+    cp /etc/resolv.conf /chroot/etc/resolv.conf && \
+    chroot /chroot /usr/bin/python3.12 -m pip install --upgrade pip setuptools && \
+    rm /chroot/usr/lib/python3.12/site-packages/distutils-precedence.pth && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
@@ -23,7 +26,6 @@ COPY stage /
 
 RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/bin/python3.12 /usr/bin/python3  && \
-    pip3 install --upgrade setuptools && \
     pip3 install --no-cache-dir "supervisor==4.2.5" && \
     ln -s /usr/local/bin/supervisord /usr/bin/supervisord && \
     pip3 install --no-cache-dir -r /requirements.txt
