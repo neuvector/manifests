@@ -6,7 +6,7 @@ LABEL neuvector.image="neuvector/updater" \
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    ca-certificates curl && \
+    ca-certificates curl grep && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
