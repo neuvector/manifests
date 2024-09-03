@@ -13,7 +13,7 @@ WORKDIR /
 COPY --from=builder /chroot/ /
 COPY stage /
 
-RUN cd /usr/bin/ && rm -rf basename chcon chgrp chmod chown chroot cksum dd df dircolors dirname du install install-info join locale localedef mkdir mkfifo mknod mktemp paste pathchk readlink realpath sync smidiff smidump smilink smiquery smistrip smixlate tee tiemout tload top truncate unlink watch
+RUN cd /usr/bin/ && rm -rf basename chcon chgrp chmod chown chroot cksum dd df dircolors dirname du install install-info join locale localedef mkdir mkfifo mknod mktemp paste pathchk readlink realpath sync smidiff smidump smilink smiquery smistrip smixlate tee tiemout tload truncate unlink watch
 RUN ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/lib64/libpcre.so.3 && \
     ln -s /usr/local/bin/libstdc++.so.6.0.19 /usr/local/bin/libstdc++.so.6 && \
     ln -s /usr/local/bin/libnfnetlink.so.0.2.0 /usr/local/bin/libnfnetlink.so.0 && \
