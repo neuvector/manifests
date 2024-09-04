@@ -4,7 +4,7 @@ MAINTAINER support@neuvector.com
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    ca-certificates iproute2 ethtool lsof procps curl jq iptables grep && \
+    ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tcpdump && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
