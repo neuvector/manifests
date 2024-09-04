@@ -1,5 +1,5 @@
 STAGE_DIR = stage
-BASEOS?=alpine
+BASEOS?=bci
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
@@ -32,7 +32,7 @@ stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/yq.4.43.1.gz > ${STAGE_DIR}/usr/local/bin/yq
 	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	tar -xvf prebuild/binary/iptables-1.8.9.tar.xz -C ${STAGE_DIR}/
-	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
+	#cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
 	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
 	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
