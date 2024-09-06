@@ -3,7 +3,7 @@ FROM registry.suse.com/bci/bci-base:15.6 AS builder
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed \
+    ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed kmod \
     libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel && \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
