@@ -18,4 +18,5 @@ RUN ln -s /usr/local/bin/libpcre.so.3.13.1 /usr/lib64/libpcre.so.3 && \
     ln -s /usr/local/bin/libstdc++.so.6.0.19 /usr/local/bin/libstdc++.so.6 && \
     ln -s /usr/local/bin/libnfnetlink.so.0.2.0 /usr/local/bin/libnfnetlink.so.0 && \
     ln -s /usr/local/bin/libnetfilter_queue.so.1.5.0 /usr/local/bin/libnetfilter_queue.so.1 && \
-    ln -s /usr/local/bin/libmnl.so.0.1.0 /usr/local/bin/libmnl.so.0
+    ln -s /usr/local/bin/libmnl.so.0.1.0 /usr/local/bin/libmnl.so.0 && \
+    ln -s /usr/lib64/libcrypto.so.3 /usr/lib/libcrypto.so.3
