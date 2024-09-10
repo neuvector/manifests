@@ -13,6 +13,7 @@ WORKDIR /
 COPY --from=builder /chroot/ /
 COPY stage /
 
-RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
-	ln -s /usr/lib64/libpcre.so.3.13.3 /usr/lib64/libpcre.so.3
 RUN cd /usr/bin/ && rm -rf basename chcon chgrp chmod chown chroot cksum dd df dircolors dirname du install install-info join locale localedef mkdir mkfifo mknod mktemp paste pathchk readlink realpath sync smidiff smidump smilink smiquery smistrip smixlate tee tiemout tload top truncate unlink watch
+RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
+    ln -s /usr/lib64/libpcre.so.3.13.3 /usr/lib64/libpcre.so.3 && \
+    ln -s /usr/lib64/libcrypto.so.3 /usr/lib/libcrypto.so.3
