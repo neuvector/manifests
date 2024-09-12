@@ -16,6 +16,10 @@ stage_fleet_base:
 	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
+ifeq ("$(BASEOS)", "alpine")
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+endif
 
 stage_scan_base: stage_fleet_base
 
@@ -32,7 +36,9 @@ stage_enf_base: stage_fleet_base
 	gzip -cd prebuild/binary/yq.4.43.1.gz > ${STAGE_DIR}/usr/local/bin/yq
 	chmod +x ${STAGE_DIR}/usr/local/bin/yq
 	tar -xvf prebuild/binary/iptables-1.8.9.tar.xz -C ${STAGE_DIR}/
-	#cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
+ifeq ("$(BASEOS)", "alpine")
+	cp prebuild/binary/tcpdump ${STAGE_DIR}/usr/local/bin/tcpdump
+endif
 	cp prebuild/binary/libpcap.so.1 ${STAGE_DIR}/usr/lib/libpcap.so.1
 	cp prebuild/binary/libcrypto.so.1.1 ${STAGE_DIR}/usr/lib/libcrypto.so.1.1
 	cp prebuild/binary/libgcc_s.so.1 ${STAGE_DIR}/usr/local/bin/
@@ -47,9 +53,17 @@ stage_enf_base: stage_fleet_base
 stage_mgr_base:
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	cp requirements.txt ${STAGE_DIR}/
+ifeq ("$(BASEOS)", "alpine")
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+endif
 
 stage_adpt_base: stage_fleet_base
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
+ifeq ("$(BASEOS)", "alpine")
+	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
+	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
+endif
 
 updater:
 	docker build --no-cache=true -t neuvector/updater:latest -f ${BASEOS}/Dockerfile.updater .
