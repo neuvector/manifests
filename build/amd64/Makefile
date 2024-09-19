@@ -11,12 +11,12 @@ stage_fleet_base:
 	mkdir -p ${STAGE_DIR}/usr/lib
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/internal/
-	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
 	cp ../share/.nvcontainer ${STAGE_DIR}/usr/local/bin/
 	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
 ifeq ("$(BASEOS)", "alpine")
+	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
 	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
 	cp ../share/etc/neuvector/certs/ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs/
 endif
