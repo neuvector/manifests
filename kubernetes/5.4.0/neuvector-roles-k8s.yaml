@@ -2,6 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: neuvector-binding-cert-upgrader
+  namespace: neuvector
 rules:
 - apiGroups:
   - ""
@@ -41,6 +42,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: neuvector-binding-job-creation
+  namespace: neuvector
 rules:
 - apiGroups:
   - batch
