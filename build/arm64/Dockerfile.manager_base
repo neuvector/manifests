@@ -1,5 +1,6 @@
-FROM registry.suse.com/bci/bci-micro:15.6 AS micro
-FROM registry.suse.com/bci/bci-base:15.6 AS builder
+ARG BCI_VERSION=15.6
+FROM registry.suse.com/bci/bci-micro:${BCI_VERSION} AS micro
+FROM registry.suse.com/bci/bci-base:${BCI_VERSION} AS builder
 
 ENV JAVA_VERSION=11.0.24_p8-r0 \
     JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
