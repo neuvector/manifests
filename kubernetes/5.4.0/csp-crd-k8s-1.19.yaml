@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: cspadapterusagerecords.susecloud.net
+spec:
+  group: susecloud.net
+  names:
+    kind: CspAdapterUsageRecord
+    listKind: CspAdapterUsageRecordList
+    plural: cspadapterusagerecords
+    singular: cspadapterusagerecord
+    shortNames:
+    - caur
+  scope: Cluster
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          base_product:
+            type: string
+          managed_node_count:
+            type: integer
+          reporting_time:
+            type: string
+        required:
+        - managed_node_count
+        - reporting_time
+        - base_product
+        type: object
+    served: true
+    storage: true
