@@ -1,9 +1,8 @@
 FROM ubuntu:20.04
-MAINTAINER gduan@neuvector.com
 
 # Dockerfile to create container to build binaries
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y build-essential autoconf libtool libpcap-dev libpcre++-dev bzr curl upx wget zip git
 
@@ -12,8 +11,8 @@ RUN apt-get install -y debconf-utils software-properties-common && \
     apt-get install -y liburcu-dev libjansson-dev libjemalloc-dev libpcre2-dev
 
 # Fleet
-ENV GOPATH /go
-ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
+ENV GOPATH=/go
+ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 RUN curl -o /tmp/golang.tar.gz -fL https://go.dev/dl/go1.14.15.linux-arm64.tar.gz
 RUN tar -C /usr/local -xzf /tmp/golang.tar.gz && rm /tmp/golang.tar.gz && \
