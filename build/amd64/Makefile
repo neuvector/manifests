@@ -15,6 +15,7 @@ stage_fleet_base:
 	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
+	chmod 660 ${STAGE_DIR}/etc/neuvector/certs/internal/*
 ifeq ("$(BASEOS)", "alpine")
 	cp prebuild/binary/glibc-2.33-r0.apk ${STAGE_DIR}/
 	cp ../share/etc/neuvector/certs/ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs/
