@@ -14,6 +14,7 @@ stage_fleet_base:
 	cp ../share/etc/neuvector/certs/internal/ca.cert ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.key ${STAGE_DIR}/etc/neuvector/certs/internal/
 	cp ../share/etc/neuvector/certs/internal/cert.pem ${STAGE_DIR}/etc/neuvector/certs/internal/
+	chmod 660 ${STAGE_DIR}/etc/neuvector/certs/internal/*
 
 stage_scan_base: stage_fleet_base
 
