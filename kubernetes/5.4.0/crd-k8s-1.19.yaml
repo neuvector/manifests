@@ -165,6 +165,12 @@ spec:
                     - basic
                     - zero-drift
                     type: string
+                  mode:
+                    enum:
+                    - Discover
+                    - Monitor
+                    - Protect
+                    type: string
                 type: object
               target:
                 properties:
@@ -425,6 +431,12 @@ spec:
                     - shield
                     - basic
                     - zero-drift
+                    type: string
+                  mode:
+                    enum:
+                    - Discover
+                    - Monitor
+                    - Protect
                     type: string
                 type: object
               target:
