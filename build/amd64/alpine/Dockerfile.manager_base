@@ -3,10 +3,10 @@ MAINTAINER support@neuvector.com
 
 COPY stage /
 
-ENV JAVA_VERSION=11.0.24_p8-r0 \
-    JAVA_ALPINE_VERSION=11.0.24_p8-r0 \
-    JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
-    PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
+ENV JAVA_VERSION=17.0.12_p8-r0 \
+    JAVA_ALPINE_VERSION=17.0.12_p8-r0 \
+    JAVA_HOME=/usr/lib/jvm/java-1.17-openjdk/jre \
+    PATH=$PATH:/usr/lib/jvm/java-1.17-openjdk/jre/bin:/usr/lib/jvm/java-1.17-openjdk/bin \
     LANG=C.UTF-8 \
 	PYTHONUNBUFFERED=1
 
@@ -16,5 +16,5 @@ RUN apk add --no-cache python3 && ln -sf python3 /usr/bin/python && \
 	pip3 install --upgrade pip setuptools && \
 	pip3 install --no-cache-dir -r /requirements.txt && \
 	rm -r /root/.cache
-RUN set -x && apk add --update ca-certificates iproute2 lsof procps openjdk11-jre="$JAVA_ALPINE_VERSION" && apk update && apk upgrade && \
+RUN set -x && apk add --update ca-certificates iproute2 lsof procps openjdk17-jre="$JAVA_ALPINE_VERSION" && apk update && apk upgrade && \
     rm -rf /tmp/* /var/cache/apk/* /requirements.txt
