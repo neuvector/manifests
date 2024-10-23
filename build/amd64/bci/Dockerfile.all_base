@@ -2,15 +2,15 @@ FROM registry.suse.com/bci/bci-micro:15.6 AS micro
 FROM registry.suse.com/bci/bci-base:15.6 AS builder
 MAINTAINER support@neuvector.com
 
-ENV JAVA_VERSION=11.0.24_p8-r0 \
-    JAVA_HOME=/usr/lib64/jvm/jre-11-openjdk/bin \
-    PATH=$PATH:/usr/lib64/jvm/jre-11-openjdk/bin \
+ENV JAVA_VERSION=17.0.12_p8-r0 \
+    JAVA_HOME=/usr/lib64/jvm/jre-17-openjdk/bin \
+    PATH=$PATH:/usr/lib64/jvm/jre-17-openjdk/bin \
     LANG=C.UTF-8 \
     PYTHONUNBUFFERED=1
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    java-11-openjdk python312 python312-pip \
+    java-17-openjdk python312 python312-pip \
     ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed kmod && \
     cp /etc/resolv.conf /chroot/etc/resolv.conf && \
     chroot /chroot /usr/bin/python3.12 -m pip install --upgrade pip setuptools && \
