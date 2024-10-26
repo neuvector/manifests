@@ -17,7 +17,6 @@ RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
-
 FROM micro
 WORKDIR /
 COPY --from=builder /chroot/ /

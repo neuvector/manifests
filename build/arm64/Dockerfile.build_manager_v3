@@ -1,0 +1,23 @@
+ARG BCI_VERSION=15.6
+FROM registry.suse.com/bci/bci-base:${BCI_VERSION}
+
+# Dockerfile to create container to build binaries
+
+# Manager
+RUN zypper refresh && \
+    zypper install -y ca-certificates wget curl zip git awk java-17-openjdk-devel nodejs20 npm20
+
+RUN curl -fL https://github.com/VirtusLab/coursier-m1/releases/latest/download/cs-aarch64-pc-linux.gz | gzip -d > cs && \
+    chmod +x cs && \
+    export PATH="$PATH:/root/.local/share/coursier/bin" && \
+    ./cs install scala:3.3.4 sbt:1.10.2 --install-dir /usr/local/bin
+
+RUN npm install -g @angular/cli@14 && \
+    npm install -g npm-force-resolutions
+
+# Manager unitest
+RUN zypper addrepo http://download.opensuse.org/repositories/openSUSE:Leap:15.6/standard/ chromium-repo && \
+    zypper --non-interactive --gpg-auto-import-keys refresh && \
+    zypper install -y chromium
+
+COPY build.sh /
