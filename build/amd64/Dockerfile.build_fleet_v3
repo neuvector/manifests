@@ -5,7 +5,7 @@ FROM registry.suse.com/bci/golang:${GO_VERSION}
 
 RUN zypper ref && \
     zypper install -y --no-recommends gcc13 gcc13-c++ make glibc-devel glibc-devel-static \
-    automake autoconf libtool libpcap-devel pcre-devel pcre2-devel curl wget zip git cmake \
+    automake autoconf libtool libpcap-devel pcre-devel pcre2-devel curl wget zip git \
     libnfnetlink-devel libnetfilter_queue-devel libmnl-devel liburcu-devel libjansson-devel jemalloc-devel && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10
