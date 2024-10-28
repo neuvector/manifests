@@ -1,0 +1,24 @@
+ARG GO_VERSION=1.22.7
+FROM registry.suse.com/bci/golang:${GO_VERSION}
+
+# Dockerfile to create container to build binaries
+
+RUN zypper ref && \
+    zypper install -y --no-recommends gcc13 gcc13-c++ binutils-gold make glibc-devel glibc-devel-static \
+    automake autoconf libtool libpcap-devel pcre-devel pcre2-devel curl wget zip git \
+    libnfnetlink-devel libnetfilter_queue-devel libmnl-devel liburcu-devel libjansson-devel jemalloc-devel && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10
+
+# Install vectorscan
+RUN zypper addrepo https://download.opensuse.org/distribution/leap/15.5/repo/oss/ openSUSE-Leap-15.5-OSS && \
+    zypper --non-interactive --gpg-auto-import-keys refresh && \
+    zypper install -y libhs5-vectorscan5 vectorscan-devel
+
+# Fleet
+ENV GOPATH=/go
+ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+RUN mkdir -p $GOPATH/src/neuvector.com && mkdir -p $GOPATH/bin
+
+COPY build.sh /
