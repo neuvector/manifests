@@ -1,5 +1,5 @@
 STAGE_DIR = stage
-BUILD_IMAGE_TAG?=v2
+BUILD_IMAGE_TAG?=v3
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}

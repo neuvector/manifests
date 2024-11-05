@@ -1,6 +1,6 @@
 STAGE_DIR = stage
 BASEOS?=bci
-BUILD_IMAGE_TAG?=
+BUILD_IMAGE_TAG?=v3
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
