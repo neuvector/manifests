@@ -10,8 +10,7 @@ RUN zypper ref && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10
 
-# Install vectorscan
-RUN zypper addrepo https://download.opensuse.org/repositories/devel:libraries:c_c++/15.6/devel:libraries:c_c++.repo && \
+RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
     zypper --non-interactive --gpg-auto-import-keys refresh && \
     zypper install -y vectorscan-devel
 
