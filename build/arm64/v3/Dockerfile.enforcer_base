@@ -7,15 +7,9 @@ RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed kmod wget unzip \
     libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel
 
-# Install yq
-RUN zypper addrepo https://download.opensuse.org/repositories/utilities/openSUSE_Factory_ARM/utilities.repo && \
+RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
     zypper --installroot /chroot -n --gpg-auto-import-keys refresh && \
-    zypper --installroot /chroot install -y yq
-
-# Install vectorscan
-RUN zypper addrepo https://download.opensuse.org/distribution/leap/15.5/repo/oss/ openSUSE-Leap-15.5-OSS && \
-    zypper --installroot /chroot -n --gpg-auto-import-keys refresh && \
-    zypper --installroot /chroot install -y libhs5-vectorscan5 vectorscan-devel
+    zypper --installroot /chroot install -y yq vectorscan-devel
 
 RUN zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
@@ -25,7 +19,7 @@ WORKDIR /
 COPY --from=builder /chroot/ /
 COPY stage /
 
-ARG CONSUL_VERSION=1.11.11
+ARG CONSUL_VERSION=1.20.1
 
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_arm64.zip && \
     unzip consul_${CONSUL_VERSION}_linux_arm64.zip -d /usr/local/bin/ && \
