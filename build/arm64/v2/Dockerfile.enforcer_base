@@ -5,8 +5,14 @@ FROM registry.suse.com/bci/bci-base:${BCI_VERSION} AS builder
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed kmod wget unzip \
-    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel && \
-    zypper --installroot /chroot clean -a && \
+    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel
+
+# Install yq
+RUN zypper addrepo https://download.opensuse.org/repositories/utilities/openSUSE_Factory_ARM/utilities.repo && \
+    zypper --installroot /chroot -n --gpg-auto-import-keys refresh && \
+    zypper --installroot /chroot install -y yq
+
+RUN zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
 FROM micro
@@ -15,13 +21,10 @@ COPY --from=builder /chroot/ /
 COPY stage /
 
 ARG CONSUL_VERSION=1.11.11
-ARG YQ_VERSION=v4.44.3
 
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_arm64.zip && \
     unzip consul_${CONSUL_VERSION}_linux_arm64.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/consul && \
-    wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_arm64 -O /usr/local/bin/yq && \
-    chmod +x /usr/local/bin/yq
+    chmod +x /usr/local/bin/consul
 
 RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8
 

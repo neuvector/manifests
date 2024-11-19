@@ -1,4 +1,5 @@
 STAGE_DIR = stage
+BUILD_IMAGE_TAG?=v3
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
@@ -30,31 +31,33 @@ stage_adpt_base: stage_fleet_base
 	mkdir -p ${STAGE_DIR}/etc/neuvector/certs/
 
 updater:
-	docker build --no-cache=true -t neuvector/updater:latest -f Dockerfile.updater .
+	docker build --no-cache=true -t neuvector/updater:latest -f ${BUILD_IMAGE_TAG}/Dockerfile.updater .
 
 scanner_base: stage_init stage_scan_base
-	docker build --no-cache=true -t neuvector/scanner_base -f Dockerfile.scanner_base .
+	docker build --no-cache=true -t neuvector/scanner_base -f ${BUILD_IMAGE_TAG}/Dockerfile.scanner_base .
 
 controller_base: stage_init stage_ctrl_base
-	docker build --no-cache=true -t neuvector/controller_base -f Dockerfile.controller_base .
+	docker build --no-cache=true -t neuvector/controller_base -f ${BUILD_IMAGE_TAG}/Dockerfile.controller_base .
 
 enforcer_base: stage_init stage_enf_base
-	docker build --no-cache=true -t neuvector/enforcer_base -f Dockerfile.enforcer_base .
+	docker build --no-cache=true -t neuvector/enforcer_base -f ${BUILD_IMAGE_TAG}/Dockerfile.enforcer_base .
 
 manager_base: stage_init stage_mgr_base
-	docker build --no-cache=true -t neuvector/manager_base -f Dockerfile.manager_base .
+	docker build --no-cache=true -t neuvector/manager_base -f ${BUILD_IMAGE_TAG}/Dockerfile.manager_base .
 
 adapter_base: stage_init stage_adpt_base
-	docker build --no-cache=true -t neuvector/adapter_base -f Dockerfile.adapter_base .
+	docker build --no-cache=true -t neuvector/adapter_base -f ${BUILD_IMAGE_TAG}/Dockerfile.adapter_base .
 
 all_base: stage_init stage_enf_base stage_ctrl_base stage_mgr_base
-	docker build --no-cache=true -t neuvector/all_base -f Dockerfile.all_base .
+	docker build --no-cache=true -t neuvector/all_base -f ${BUILD_IMAGE_TAG}/Dockerfile.all_base .
 
 
 build_manager:
 	docker build --no-cache=true -t neuvector/build_manager:latest -f Dockerfile.build_manager .
+	docker build --no-cache=true -t neuvector/build_manager:v3 -f Dockerfile.build_manager_v3 .
 
 build_fleet:
 	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
 	docker build --no-cache=true -t neuvector/build_fleet:v1 -f Dockerfile.build_fleet_v1 .
 	docker build --no-cache=true -t neuvector/build_fleet:v2 -f Dockerfile.build_fleet_v2 .
+	docker build --no-cache=true -t neuvector/build_fleet:v3 -f Dockerfile.build_fleet_v3 .

@@ -2,18 +2,23 @@ ARG BCI_VERSION=15.6
 FROM registry.suse.com/bci/bci-micro:${BCI_VERSION} AS micro
 FROM registry.suse.com/bci/bci-base:${BCI_VERSION} AS builder
 
-ENV JAVA_VERSION=11.0.24_p8-r0 \
-    JAVA_HOME=/usr/lib/jvm/java-1.11-openjdk/jre \
-    PATH=$PATH:/usr/lib/jvm/java-1.11-openjdk/jre/bin:/usr/lib/jvm/java-1.11-openjdk/bin \
+ENV JAVA_VERSION=17.0.12_p8-r0 \
+    JAVA_HOME=/usr/lib/jvm/java-1.17-openjdk/jre \
+    PATH=$PATH:/usr/lib/jvm/java-1.17-openjdk/jre/bin:/usr/lib/jvm/java-1.17-openjdk/bin \
     LANG=C.UTF-8 \
     PYTHONUNBUFFERED=1
 
 COPY --from=micro / /chroot/
 RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
-    java-11-openjdk python312 python312-pip \
+    java-17-openjdk python312 python312-pip \
     ca-certificates iproute2 ethtool lsof procps curl jq iptables grep tar awk tcpdump sed kmod wget unzip \
-    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel && \
-    cp /etc/resolv.conf /chroot/etc/resolv.conf && \
+    libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel
+
+RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
+    zypper --installroot /chroot -n --gpg-auto-import-keys refresh && \
+    zypper --installroot /chroot install -y yq vectorscan-devel
+
+RUN cp /etc/resolv.conf /chroot/etc/resolv.conf && \
     chroot /chroot /usr/bin/python3.12 -m pip install --upgrade pip setuptools && \
     rm /chroot/usr/lib/python3.12/site-packages/distutils-precedence.pth && \
     zypper --installroot /chroot clean -a && \
@@ -25,9 +30,8 @@ COPY --from=builder /chroot/ /
 COPY --from=builder /usr/sbin/useradd /usr/sbin
 COPY stage /
 
-ARG CONSUL_VERSION=1.11.11
-ARG YQ_VERSION=v4.44.3
-ARG OPA_VERSION=v0.68.0
+ARG CONSUL_VERSION=1.20.1
+ARG OPA_VERSION=v0.70.0
 
 RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/bin/python3.12 /usr/bin/python3  && \
@@ -38,8 +42,6 @@ RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_arm64.zip && \
     unzip consul_${CONSUL_VERSION}_linux_arm64.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/consul && \
-    wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_arm64 -O /usr/local/bin/yq && \
-    chmod +x /usr/local/bin/yq && \
     curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_arm64_static && \
     chmod +x /usr/local/bin/opa
 

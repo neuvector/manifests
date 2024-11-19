@@ -1,8 +1,8 @@
-FROM registry.suse.com/bci/bci-micro:15.6 AS micro
-FROM registry.suse.com/bci/bci-base:15.6 AS builder
-MAINTAINER support@neuvector.com
+ARG BCI_VERSION=15.6
+FROM registry.suse.com/bci/bci-micro:${BCI_VERSION} AS micro
+FROM registry.suse.com/bci/bci-base:${BCI_VERSION} AS builder
 
-ENV JAVA_VERSION=17.0.12_p8-r0\
+ENV JAVA_VERSION=17.0.12_p8-r0 \
     JAVA_HOME=/usr/lib/jvm/java-1.17-openjdk/jre \
     PATH=$PATH:/usr/lib/jvm/java-1.17-openjdk/jre/bin:/usr/lib/jvm/java-1.17-openjdk/bin \
     LANG=C.UTF-8 \
