@@ -23,7 +23,8 @@ ARG CONSUL_VERSION=1.20.1
 
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip && \
     unzip consul_${CONSUL_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/consul
+    chmod +x /usr/local/bin/consul && \
+    rm consul_${CONSUL_VERSION}_linux_amd64.zip
 
 RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8
 

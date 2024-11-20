@@ -10,6 +10,10 @@ RUN zypper ref && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10
 
+RUN zypper addrepo https://download.opensuse.org/repositories/devel:tools:compiler/15.6/devel:tools:compiler.repo && \
+    zypper --non-interactive --gpg-auto-import-keys refresh && \
+    zypper install -y clang17 llvm17
+
 RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
     zypper --non-interactive --gpg-auto-import-keys refresh && \
     zypper install -y vectorscan-devel

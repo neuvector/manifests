@@ -43,6 +43,7 @@ RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
 RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip && \
     unzip consul_${CONSUL_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/consul && \
+    rm consul_${CONSUL_VERSION}_linux_amd64.zip && \
     curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64_static && \
     chmod +x /usr/local/bin/opa
 
