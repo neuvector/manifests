@@ -1,11 +1,11 @@
-ARG GO_VERSION=1.22.7
+ARG GO_VERSION=1.22
 FROM registry.suse.com/bci/golang:${GO_VERSION}
 
 # Dockerfile to create container to build binaries
 
 RUN zypper ref && \
     zypper install -y --no-recommends gcc13 gcc13-c++ make glibc-devel glibc-devel-static \
-    automake autoconf libtool libpcap-devel pcre-devel pcre2-devel curl wget zip git \
+    python312 automake autoconf libtool libpcap-devel pcre-devel pcre2-devel curl wget zip git \
     libnfnetlink-devel libnetfilter_queue-devel libmnl-devel liburcu-devel libjansson-devel jemalloc-devel && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 10 && \
     update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 10
@@ -17,6 +17,9 @@ RUN zypper addrepo https://download.opensuse.org/repositories/devel:tools:compil
 RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
     zypper --non-interactive --gpg-auto-import-keys refresh && \
     zypper install -y vectorscan-devel
+
+RUN ln -sf /usr/bin/python3.12 /usr/bin/python && \
+    ln -sf /usr/bin/python3.12 /usr/bin/python3
 
 # Fleet
 ENV GOPATH=/go
