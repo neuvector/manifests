@@ -49,6 +49,9 @@ data:
         - id: admctrl
           read: true
           write: true
+        - id: vulnerability
+          read: true
+          write: true
         - id: compliance
           read: true
           write: true
