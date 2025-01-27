@@ -15,8 +15,10 @@ RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     libnetfilter_queue-devel liburcu-devel libpcap-devel pcre2-devel libjansson-devel libmnl-devel jemalloc-devel
 
 RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
-    zypper --installroot /chroot -n --gpg-auto-import-keys refresh && \
-    zypper --installroot /chroot install -y yq vectorscan-devel
+    rpm --import https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/repodata/repomd.xml.key && \
+    zypper -n refresh && \
+    zypper --installroot /chroot install -y yq libhs5-vectorscan5 vectorscan-devel consul
+RUN mv /chroot/usr/bin/consul /chroot/usr/local/bin/consul
 
 RUN cp /etc/resolv.conf /chroot/etc/resolv.conf && \
     chroot /chroot /usr/bin/python3.12 -m pip install --upgrade pip setuptools && \
@@ -30,7 +32,6 @@ COPY --from=builder /chroot/ /
 COPY --from=builder /usr/sbin/useradd /usr/sbin
 COPY stage /
 
-ARG CONSUL_VERSION=1.20.1
 ARG OPA_VERSION=v0.70.0
 
 RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
@@ -39,11 +40,7 @@ RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/local/bin/supervisord /usr/bin/supervisord && \
     rm -r /root/.cache /requirements.txt
 
-RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_arm64.zip && \
-    unzip consul_${CONSUL_VERSION}_linux_arm64.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/consul && \
-    rm consul_${CONSUL_VERSION}_linux_arm64.zip && \
-    curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_arm64_static && \
+RUN curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_arm64_static && \
     chmod +x /usr/local/bin/opa
 
 RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
