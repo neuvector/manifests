@@ -8,19 +8,20 @@ RUN zypper --installroot /chroot -n --gpg-auto-import-keys in --no-recommends \
     zypper --installroot /chroot clean -a && \
     rm -rf /chroot/var/log/
 
+RUN zypper addrepo https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/isv:SUSE:neuvector.repo && \
+    rpm --import https://download.opensuse.org/repositories/isv:SUSE:neuvector/15.6/repodata/repomd.xml.key && \
+    zypper -n refresh && \
+    zypper --installroot /chroot install -y consul
+RUN mv /chroot/usr/bin/consul /chroot/usr/local/bin/consul
+
 FROM micro
 WORKDIR /
 COPY --from=builder /chroot/ /
 COPY stage /
 
-ARG CONSUL_VERSION=1.20.1
 ARG OPA_VERSION=v0.70.0
 
-RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip && \
-    unzip consul_${CONSUL_VERSION}_linux_amd64.zip -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/consul && \
-    rm consul_${CONSUL_VERSION}_linux_amd64.zip && \
-    curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64_static && \
+RUN curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64_static && \
     chmod +x /usr/local/bin/opa
 RUN ln -s /usr/lib64/libpcre.so.1 /usr/lib64/libpcre.so.3
 
