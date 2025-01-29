@@ -340,6 +340,8 @@ data:
       Auto_Scan: false
     # Optional. default value is 24. unit is hour and range is between 0 and 168
     Unused_Group_Aging: 24
+    # Write notifications to controller pod logs
+    output_event_to_logs: false
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
