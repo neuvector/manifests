@@ -56,6 +56,8 @@ spec:
                           type: array
                         name:
                           type: string
+                        name_referral:
+                          type: boolean
                         original_name:
                           type: string
                       required:
@@ -127,6 +129,8 @@ spec:
                           type: array
                         name:
                           type: string
+                        name_referral:
+                          type: boolean
                         original_name:
                           type: string
                       required:
@@ -210,6 +214,8 @@ spec:
                         type: boolean
                       name:
                         type: string
+                      name_referral:
+                        type: boolean
                       original_name:
                         type: string
                     required:
@@ -323,6 +329,8 @@ spec:
                           type: array
                         name:
                           type: string
+                        name_referral:
+                          type: boolean
                         original_name:
                           type: string
                       required:
@@ -394,6 +402,8 @@ spec:
                           type: array
                         name:
                           type: string
+                        name_referral:
+                          type: boolean
                         original_name:
                           type: string
                       required:
@@ -477,6 +487,8 @@ spec:
                         type: boolean
                       name:
                         type: string
+                      name_referral:
+                        type: boolean
                       original_name:
                         type: string
                     required:
