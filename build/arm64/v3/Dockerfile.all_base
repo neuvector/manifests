@@ -32,7 +32,7 @@ COPY --from=builder /chroot/ /
 COPY --from=builder /usr/sbin/useradd /usr/sbin
 COPY stage /
 
-ARG OPA_VERSION=v0.70.0
+ARG OPA_VERSION=v1.4.2
 
 RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/bin/python3.12 /usr/bin/python3  && \
@@ -40,7 +40,7 @@ RUN ln -s /usr/bin/python3.12 /usr/bin/python && \
     ln -s /usr/local/bin/supervisord /usr/bin/supervisord && \
     rm -r /root/.cache /requirements.txt
 
-RUN curl -L -o /usr/local/bin/opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_arm64_static && \
+RUN curl -fL -o /usr/local/bin/opa https://github.com/open-policy-agent/opa/releases/download/${OPA_VERSION}/opa_linux_arm64_static && \
     chmod +x /usr/local/bin/opa
 
 RUN ln -s /usr/lib64/libpcap.so /usr/lib64/libpcap.so.0.8 && \
