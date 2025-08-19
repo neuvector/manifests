@@ -3,8 +3,6 @@ kind: CustomResourceDefinition
 metadata:
   name: nvresponserulesecurityrules.neuvector.com
 spec:
-  conversion:
-    strategy: None
   group: neuvector.com
   names:
     kind: NvResponseRuleSecurityRule
