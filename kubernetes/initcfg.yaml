@@ -247,6 +247,8 @@ data:
             - custom-admin2
     group_claim: groups
   sysinitcfg.yaml: |
+    # Optional. Enable restricted group mode if set to true
+    Strict_Group_Mode: false
     # Optional. true or false or empty string(false)
     always_reload: false
     # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
