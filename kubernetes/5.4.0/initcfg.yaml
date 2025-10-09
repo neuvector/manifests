@@ -251,6 +251,10 @@ data:
             - custom-admin2
     group_claim: groups
   sysinitcfg.yaml: |
+    # Optional. Enable restricted group mode if set to true
+    Strict_Group_Mode: false
+    # Optional. namespace user which has runtime-policy(r) permission can export network policy of the groups
+    Allow_Ns_User_Export_Net_Policy : false
     # Optional. true or false or empty string(false)
     always_reload: false
     # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
