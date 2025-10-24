@@ -1,4 +1,5 @@
 STAGE_DIR = stage
+BUILD_MANAGER_TAG?=5.3
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
@@ -62,7 +63,7 @@ all_base: stage_init stage_enf_base stage_ctrl_base stage_mgr_base
 
 
 build_manager:
-	docker build --no-cache=true -t neuvector/build_manager:latest -f Dockerfile.build_manager .
+	docker build --no-cache=true -t neuvector/build_manager:${BUILD_MANAGER_TAG} -f Dockerfile.build_manager .
 
 build_fleet:
 	docker build --no-cache=true -t neuvector/build_fleet:latest -f Dockerfile.build_fleet .
