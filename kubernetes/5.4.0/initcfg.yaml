@@ -380,6 +380,8 @@ data:
     Unused_Group_Aging: 24
     # Write notifications to controller pod logs
     output_event_to_logs: false
+    # Mandatory to enable TLS verification
+    enable_tls_verification: true
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
