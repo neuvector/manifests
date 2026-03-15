@@ -13,9 +13,10 @@ RUN curl -fL https://github.com/VirtusLab/coursier-m1/releases/latest/download/c
     export PATH="$PATH:/root/.local/share/coursier/bin" && \
     ./cs install scala:3.3.4 sbt:1.10.2 --install-dir /usr/local/bin
 
+ENV npm_config_build_from_source=true
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -uy nodejs && \
-    npm install -g @angular/cli@14 && \
+    npm install -g @angular/cli@20 && \
     npm install -g npm-force-resolutions
 
 # Manager unitest
