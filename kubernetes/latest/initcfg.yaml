@@ -173,7 +173,7 @@ data:
     # Mandatory
     Client_Secret: AyAixE3...
     # Optional. empty or string(group filter info)
-    GroupClaim:  
+    Group_Claim:
     # Optional. empty string(openid,profile,email)
     Scopes:
       - openid
@@ -241,7 +241,7 @@ data:
         ...
         -----END CERTIFICATE-----
     # Optional. empty or string(group filter info)
-    GroupClaim:  
+    Group_Claim:
     # Optional. true or false or empty string(false)
     Enable: false
     # Optional. admin or reader or empty string(none)
@@ -285,10 +285,16 @@ data:
             - custom-admin2
     group_claim: groups
   sysinitcfg.yaml: |
+    # Optional. Enable restricted group mode if set to true
+    Strict_Group_Mode: false
+    # Optional. namespace user which has runtime-policy(r) permission can export network policy of the groups
+    Allow_Ns_User_Export_Net_Policy : false
     # Optional. true or false or empty string(false)
     always_reload: false
     # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
     New_Service_Policy_Mode: Discover
+    # Optional. Choose between  Discover or Monitor or Protect or empty string(Discover)
+    New_Service_Profile_Mode: Discover
     # Optional. zero-drift or basic or empty string(zero-drift)
     New_Service_Profile_Baseline: zero-drift
     # Optional. input valid ipv4 address or empty string
@@ -372,6 +378,24 @@ data:
       Auto_Scan: false
     # Optional. default value is 24. unit is hour and range is between 0 and 168
     Unused_Group_Aging: 24
+    # Write notifications to controller pod logs
+    output_event_to_logs: false
+    # Mandatory to enable TLS verification
+    enable_tls_verification: true
+    # Optional. TLS self-signed certificate context
+    Cacerts:
+      - |
+        -----BEGIN CERTIFICATE-----
+        ..................
+        ..................
+        ........
+        -----END CERTIFICATE-----
+      - |
+        -----BEGIN CERTIFICATE-----
+        ..................
+        ..................
+        ........
+        -----END CERTIFICATE-----
   userinitcfg.yaml: |
     # Optional. true or false or empty string(false)
     always_reload: false
