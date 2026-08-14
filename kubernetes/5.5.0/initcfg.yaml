@@ -33,6 +33,8 @@ data:
       Port: 10443
     # Optional. Supported value: https
     Use_Proxy: ""
+    # Optional. Allow managed cluster without persistent storage can rejoin
+    Allow_Same_K8s_Uid_Rejoin: false
     # <<< ============ this section is used for remote cluster ============
   passwordprofileinitcfg.yaml: |
     # Optional. true or false or empty string(false)
