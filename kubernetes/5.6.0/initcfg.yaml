@@ -334,10 +334,16 @@ data:
         type: Slack
         enable: true
         use_proxy: false
+        # Optional. username/password for webhook authentication
+        username: user1
+        password: .....
       - name: mywebhook
         url: http...
         enable: true
         use_proxy: false
+        # Optional. username/password for webhook authentication
+        username: user2
+        password: .....
     # Optional. empty string
     Cluster_Name: cluster.local
     # Optional. chose multiple between cpath/mutex/conn/scan/cluster or empty string
