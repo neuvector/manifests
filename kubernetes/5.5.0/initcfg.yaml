@@ -242,6 +242,8 @@ data:
         MIIC8DCCAdigAwIBAgIQSMNDFv5HI7RPgF0uHW8YJDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
         ...
         -----END CERTIFICATE-----
+    # Optional. Highly recommend to configure it as configured in SAML Identity Provider (IdP) dashboard like Okta
+    Audience_Uri:
     # Optional. empty or string(group filter info)
     Group_Claim:
     # Optional. true or false or empty string(false)
